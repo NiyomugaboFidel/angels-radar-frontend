@@ -9,8 +9,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        "primaryColor":"#073763",
+        "secondaryColor":"#00D566",
+        "color1":"#201E1E",
+        "color2":"#616771"
+      },
+      backgroundImage: {
+        'form-bg': "url('/images/background.png')",
       },
     },
   },
