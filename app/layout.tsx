@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'react-hot-toast';
 // Load Circular Std font
 const circularStd = localFont({
   src: [
@@ -25,6 +26,8 @@ export const metadata: Metadata = {
   icons: "/logo.svg",
 };
 
+const queryClient = new QueryClient();
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -33,7 +36,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${circularStd.variable} antialiased`}>
+        <QueryClientProvider client={queryClient}>
+        <Toaster position="bottom-right" reverseOrder={false} />
         {children}
+        </QueryClientProvider>
+    
       </body>
     </html>
   );

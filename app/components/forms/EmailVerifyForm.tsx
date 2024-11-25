@@ -2,18 +2,12 @@
 
 import Button from "@/app/components/common/Button";
 import FormField from "@/app/components/common/InputField";
+import VerifyCodeValidationSchema from "@/app/validation/OtpValidationSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Eye, EyeOff } from "lucide-react";
 import React, { useState } from "react";
 import { useForm, FormProvider} from "react-hook-form";
-import * as Yup from "yup";
 
-const VerifyCodeValidationSchema = Yup.object().shape({
-  otpcode: Yup.string()
-    .min(6, "Code must be exactly 6 numbers")
-    .max(6, "Code must be exactly 6 numbers")
-    .required("Code is required"),
-});
 
 const EmailVerification = () => {
   const [showPassword, setShowPassword] = useState(false);
