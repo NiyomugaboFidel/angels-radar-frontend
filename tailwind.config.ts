@@ -14,6 +14,15 @@ export default {
         "color1":"#201E1E",
         "color2":"#616771"
       },
+      fontSize:{
+        "sm":"14px",
+        "lg":"32px"
+
+      },
+      lineHeight:{
+        "sm":"17.75px",
+        "lg":"40.48px"
+      },
       backgroundImage: {
         'form-bg': "url('/images/background.png')",
       },

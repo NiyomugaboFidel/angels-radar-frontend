@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm, FormProvider, useFormContext } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Eye, EyeOff } from "lucide-react";
 import SignupValidationSchema from "@/app/validation/SiginuoValidationSchema";
@@ -21,7 +21,7 @@ interface SignupData {
 }
 
 // Main SignUp Component
-const SignUpForm = () => {
+const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -56,12 +56,12 @@ const SignUpForm = () => {
 
           <div className="flex items-center justify-center flex-col pb-[50px]">
             <h1 className="text-[30px] leading-[40px] font-[500] text-center text-color1 ">
-              Create an account
+            Welcome back
             </h1>
             <p className="text-center text-[18px] leading-[27px] text-color2 font-[450] ">
-              Already joined?{" "}
-              <Link href="/auth/login" className="text-primaryColor hover:underline">
-                Sign in
+            Don’t have an account?{" "}
+              <Link href="/auth/signup" className="text-primaryColor hover:underline">
+                Sign up
               </Link>
             </p>
           </div>
@@ -70,11 +70,6 @@ const SignUpForm = () => {
 
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FormField label="First name" name="firstName" placeholder="Enter your first name" />
-              <FormField label="Last name" name="lastName" placeholder="Enter your last name" />
-            </div>
-
             <FormField
               label="Email Address"
               name="email"
@@ -124,7 +119,7 @@ const SignUpForm = () => {
               disabled={isLoading || !termsAccepted}
               className="w-full hover:bg-[#052666] text-white py-2  transition-colors disabled:bg-primaryColor"
             >
-              {isLoading ? "Signing up..." : "Sign up"}
+              {isLoading ? "Signing in..." : "Sign in"}
             </Button>
 
             <Button
@@ -146,4 +141,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default LoginForm;
