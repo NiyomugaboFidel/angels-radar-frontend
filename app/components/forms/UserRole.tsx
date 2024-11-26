@@ -2,6 +2,7 @@
 import { Lock } from "lucide-react";
 import AccountCard from "../common/AccountCard";
 import Button from "../common/Button";
+import Image from "next/image";
 function ChooseRole() {
   return (
     <div className=" min-h-screen h-full flex overflow-hidden bg-white p-8 lg:p-0">
@@ -14,7 +15,7 @@ function ChooseRole() {
                 <div className="w-full flex items-center justify-center">
                   {/* Top logo */}
                   <div className="pt-12  w-full  flex max-w-[473px] items-center justify-start">
-                    <img
+                    <Image width={50} height={50}
                       src="/logo.svg"
                       alt="Angels Radar Logo"
                       className="h-[50px] w-[50px]"
@@ -26,7 +27,7 @@ function ChooseRole() {
                   {/* Quote section */}
                   <div className="mb-20 max-w-[473px]">
                     <div className="text-white text-4xl mb-4">
-                      <img src="/quote.svg" alt="quote" />
+                      <Image width={20} height={20} src="/quote.svg" alt="quote" />
                     </div>
                     <p className="text-white  text-[18px] font-medium leading-[38px]">
                       The passage experienced a surge in popularity during the
@@ -56,7 +57,7 @@ function ChooseRole() {
                       </div>
                       {/* Bottom corner decoration */}
                       <div className="">
-                        <img src="/right-angle.svg" alt="Bottom corner" />
+                        <Image width={20} height={20} src="/right-angle.svg" alt="Bottom corner" />
                       </div>
                     </div>
                   </div>

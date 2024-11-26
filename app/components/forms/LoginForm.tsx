@@ -5,43 +5,34 @@ import { useRouter } from "next/navigation";
 import { useForm, FormProvider, useFormContext } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Eye, EyeOff } from "lucide-react";
-import SignupValidationSchema from "@/app/validation/SiginuoValidationSchema";
+import SignupValidationSchema from "@/app/validation/SignupValidationSchema";
 import FormField from "../common/InputField";
 import Button from "../common/Button";
+import Image from "next/image";
+import useLogin from "@/app/hooks/users/useLogin";
+import SigninValidationSchema from "@/app/validation/SigninValidationSchema";
+import { SignInPayload } from "@/app/libs/api";
 
-// Validation Schema
-
-// Types
-interface SignupData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  terms: boolean;
-}
 
 // Main SignUp Component
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
-
+  const { mutate: signin, isPending } = useLogin();
+  const isLoading = isPending
   const methods = useForm({
-    resolver: yupResolver(SignupValidationSchema),
+    resolver: yupResolver(SigninValidationSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
       email: "",
       password: "",
-      terms: false,
+     
     },
   });
-  const termsAccepted = methods.watch("terms");
-  const onSubmit = async (data: SignupData | any) => {
-    setIsLoading(true);
+
+  const onSubmit = async (data: SignInPayload) => {
     console.log("Form Data:", data);
     // Handle signup logic here
-    setIsLoading(false);
+    signin(data);
+
   };
 
   return (
@@ -50,7 +41,7 @@ const LoginForm = () => {
         <div className="flex items-center justify-center flex-col gap-[20px]">
           {/* Logo */}
           <div className="flex justify-center items-center gap-1 ">
-            <img src="/logo.svg" alt="Angels Radar Logo" className="h-8" />
+            <Image height={50} width={50} src="/logo.svg" alt="Angels Radar Logo" className="h-[50px] w-[50px]" />
             <span className=" text-[20px] leading-[30px] font-bold">Angels Radar</span>
           </div>
 
@@ -92,31 +83,15 @@ const LoginForm = () => {
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
             </div>
-
-            <div className="flex items-start">
-              <input
-                type="checkbox"
-                id="terms"
-                {...methods.register("terms")}
-                className="mt-1 outline-none"
-              />
-              <label htmlFor="terms" className="ml-2 text-[14px] leading-[17px] text-color2">
-                I agree to all statements included in{" "}
-                <a href="#" className="text-primaryColor hover:underline">
-                  Terms of Use
-                </a>
-              </label>
-            </div>
-            {methods.formState.errors.terms && (
-              <p className="text-red-500 text-sm">
-                {methods.formState.errors.terms.message}
-              </p>
-            )}
+             <p className="text-sm leading-sm text-color1"><Link className="hover:underline" href={'/auth/forgot-password'}>Forgot Password?</Link></p>
+        
+              
+       
 
             <Button
               type="submit"
               variant="primary"
-              disabled={isLoading || !termsAccepted}
+              disabled={isLoading}
               className="w-full hover:bg-[#052666] text-white py-2  transition-colors disabled:bg-primaryColor"
             >
               {isLoading ? "Signing in..." : "Sign in"}
@@ -127,12 +102,14 @@ const LoginForm = () => {
               variant="secondary"
               className="w-full   py-2 px-4 rounded-md flex items-center justify-center space-x-2  transition-colors"
             >
-              <img
+              <Image
+               width={20}
+               height={20}
                 src="/google.svg"
                 alt="Google logo"
                 className="h-5 w-5"
               />
-              <span>Sign up with Google</span>
+              <span>Sign in with Google</span>
             </Button>
           </form>
         </FormProvider>

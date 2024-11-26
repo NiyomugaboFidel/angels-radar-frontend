@@ -11,7 +11,9 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@tanstack/react-query": "^5.61.3",
+    "@tanstack/react-query-devtools": "^5.61.3",
     "axios": "^1.7.7",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.460.0",
     "next": "15.0.3",
     "react": "^18.3.1",
@@ -21,6 +23,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

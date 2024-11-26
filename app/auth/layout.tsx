@@ -24,18 +24,16 @@ export const metadata: Metadata = {
   icons: "/logo.svg",
 };
 
-export default function RootLayout({
+export default function AuthLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${circularStd.variable} antialiased`}>
+      <div className={`${circularStd.variable} antialiased`}>
       <div className="w-full h-full bg-form-bg bg-cover bg-no-repeat min-h-screen">
       {children}
       </div>
-      </body>
-    </html>
+      </div>
   );
 }

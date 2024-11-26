@@ -5,13 +5,13 @@ import { useRouter } from "next/navigation";
 import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Eye, EyeOff } from "lucide-react";
-import SignupValidationSchema from "@/app/validation/SiginuoValidationSchema";
+import SignupValidationSchema from "@/app/validation/SignupValidationSchema";
 import FormField from "../common/InputField";
 import Button from "../common/Button";
+import useSignup from "@/app/hooks/users/useSignup";
+import Image from "next/image";
 
-// Validation Schema
 
-// Types
 interface SignupData {
   firstName: string;
   lastName: string;
@@ -20,12 +20,11 @@ interface SignupData {
   terms: boolean;
 }
 
-// Main SignUp Component
+
 const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
-
+  const { mutate: signup, isPending } = useSignup();
+  const isLoading = isPending;
   const methods = useForm({
     resolver: yupResolver(SignupValidationSchema),
     defaultValues: {
@@ -38,10 +37,8 @@ const SignUpForm = () => {
   });
   const termsAccepted = methods.watch("terms");
   const onSubmit = async (data: SignupData | any) => {
-    setIsLoading(true);
     console.log("Form Data:", data);
-    // Handle signup logic here
-    setIsLoading(false);
+    signup(data);
   };
 
   return (
@@ -50,7 +47,7 @@ const SignUpForm = () => {
         <div className="flex items-center justify-center flex-col gap-[20px]">
           {/* Logo */}
           <div className="flex justify-center items-center gap-1 ">
-            <img src="/logo.svg" alt="Angels Radar Logo" className="h-8" />
+            <Image width={50} height={50} src="/logo.svg" alt="Angels Radar Logo" className="" />
             <span className=" text-[20px] leading-[30px] font-bold">Angels Radar</span>
           </div>
 
@@ -132,7 +129,9 @@ const SignUpForm = () => {
               variant="secondary"
               className="w-full   py-2 px-4 rounded-md flex items-center justify-center space-x-2  transition-colors"
             >
-              <img
+              <Image
+               width={20}
+               height={20}
                 src="/google.svg"
                 alt="Google logo"
                 className="h-5 w-5"
