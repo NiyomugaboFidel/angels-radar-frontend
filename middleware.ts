@@ -10,6 +10,7 @@ export async function middleware(request: NextRequest) {
   const token = cookies.ANGELS_RADAR_JWT
 
 //   console.log(token);
+//   console.log(token);
 
   if (!token) {
     return redirectToSignIn(request);
