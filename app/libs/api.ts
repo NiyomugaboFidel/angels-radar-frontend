@@ -17,6 +17,9 @@ export interface VerifyEmailPayload {
   otp: number;
 
 }
+export interface ChooseAccountTypePayload {
+  role:string
+}
 
 export const signup = async (data: SignupPayload) => {
   const response = await api.post('/users/create', data);
@@ -31,6 +34,11 @@ export const signin = async (data: SignInPayload) => {
 };
 export const verifyEmail = async (data: VerifyEmailPayload) => {
   const response = await api.post('/users/verify-email', data);
+//   console.log('Response:',response);
+  return response.data; 
+};
+export const chooseAcountType = async (data : ChooseAccountTypePayload) => {
+  const response = await api.put('/users/role', data);
 //   console.log('Response:',response);
   return response.data; 
 };

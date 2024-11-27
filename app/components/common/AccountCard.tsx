@@ -55,7 +55,7 @@ interface AccountProps {
     );
   };
   
-  const AccountCard: React.FC = () => {
+  const AccountCard: React.FC = ({}) => {
     const [isActive, setIsActive] = useState("owner");
     const handlerIsActive = (value: string) => {
       setIsActive(value);
@@ -117,4 +117,4 @@ interface AccountProps {
       </div>
     );
   };
-  export default AccountCard
+  export default Account

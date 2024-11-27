@@ -12,24 +12,20 @@ const useLogin = () => {
       toast.success("Sign in successful!");
       localStorage.setItem("ANGELS_RADAR_JWT", data.token);
 
-      Cookies.set(
-        "user",
-        JSON.stringify(data.user),
-        { expires: 7, path: "/" }
-      );
-      const userCookie = Cookies.get("user");
+      Cookies.set("user", JSON.stringify(data.user), { expires: 7, path: "/" });
+      Cookies.set("ANGELS_RADAR_JWT", data.token, { expires: 7, path: "/" });
+      localStorage.setItem("role", data.user.role);
 
-      // Decode and parse the cookie content
-      const user = userCookie ? JSON.parse(userCookie) : null;
-      console.log({user})      
-    //   setTimeout(() => {
-    //     router.push(`/auth/user`);
-    //   }, 1500);
+      Cookies.set("role", data.user.role, { expires: 7, path: "/" });
+
+      setTimeout(() => {
+        router.push(`/`);
+      }, 1500);
     },
     onError: (error: any) => {
       const errorMessage = error.response?.data.errors
         ? error.response?.data.errors[0]
-        : error.response?.data?.message || "Signup failed. Please try again.";
+        : error.response?.data?.message || "Sign in failed. Please try again.";
       toast.error(errorMessage);
     },
   });
