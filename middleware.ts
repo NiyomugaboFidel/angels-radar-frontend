@@ -1,16 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
-import cookie from "cookie";
+
 const secretKey = process.env.NEXT_PUBLIC_JWT_SECRET_KEY || "";
 
 export async function middleware(request: NextRequest) {
-  const cookies = request.headers.get("cookie")
-    ? cookie.parse(request.headers.get("cookie")!)
-    : {};
-  const token = cookies.ANGELS_RADAR_JWT
-
-//   console.log(token);
-//   console.log(token);
+  const token = request.cookies.get("ANGELS_RADAR_JWT")?.value;
+  // console.log({token});
 
   if (!token) {
     return redirectToSignIn(request);
@@ -19,10 +14,10 @@ export async function middleware(request: NextRequest) {
   try {
     const secret = new TextEncoder().encode(secretKey);
     const { payload } = await jwtVerify(token, secret);
+  
 
-    const role = payload.role || cookies.role;
+    const role = payload.role || request.cookies.get("role")?.value;
     // console.log({role})
-
     if (role !== "investor" && role !== "owner") {
       return NextResponse.redirect(new URL("/auth/user", request.url));
     }
@@ -39,5 +34,5 @@ function redirectToSignIn(request: NextRequest): NextResponse {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*","/"], 
+  matcher: ["/dashboard/:path*", "/"], 
 };
