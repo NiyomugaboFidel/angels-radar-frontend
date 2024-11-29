@@ -49,12 +49,23 @@ const ChooseRole = () => {
     "Specify your funding goals and additional information.",
   ];
 
-  const handleNext = () => {
-    if (currentPage < titles.length - 1) {
+  type FormFields = "name" | "email" | "phone" | "mon";
+
+  const handleNext = async () => {
+    const fieldsToValidate = {
+      0: ["name"],
+      1: ["email"],
+      2: ["phone"],
+      3: ["mon"]
+    }[currentPage] as FormFields[];
+  
+    const isValid = await methods.trigger(fieldsToValidate);
+    if (isValid && currentPage < titles.length - 1) {
       setDirection(1);
       setCurrentPage((prev) => prev + 1);
     }
   };
+  
 
   const handlePrev = () => {
     if (currentPage > 0) {
