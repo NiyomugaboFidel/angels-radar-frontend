@@ -33,7 +33,7 @@ const EmailVerification = () => {
     const token = searchParams.get('evt')
     if (token !== null || token !== undefined) {
       const values = { token: token ?? '', otp: Number(data.otp) }
-      console.log(values)
+      // console.log(values)
       verify(values)
     }
 
@@ -150,10 +150,12 @@ const EmailVerification = () => {
                     Cancel
                   </Button>
                   <Button
+                   disabled ={isLoading}
+
                     type="submit"
                     variant="primary"
                   >
-                    Verify
+                  {isLoading ? "  Verify...":"Verify" }
                   </Button>
                 </div>
               </form>

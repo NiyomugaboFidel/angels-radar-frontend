@@ -29,7 +29,7 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (data: SignInPayload) => {
-    console.log("Form Data:", data);
+    // console.log("Form Data:", data);
     // Handle signup logic here
     signin(data);
 

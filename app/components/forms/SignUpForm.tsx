@@ -37,7 +37,7 @@ const SignUpForm = () => {
   });
   const termsAccepted = methods.watch("terms");
   const onSubmit = async (data: SignupData | any) => {
-    console.log("Form Data:", data);
+    // console.log("Form Data:", data);
     signup(data);
   };
 
