@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
+    "@radix-ui/react-select": "^2.1.2",
     "@tanstack/react-query": "^5.61.3",
     "@tanstack/react-query-devtools": "^5.61.3",
     "axios": "^1.7.7",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "cookie": "^1.0.2",
     "framer-motion": "^11.11.17",
     "jose": "^5.9.6",
@@ -24,6 +27,8 @@
     "react-hook-form": "^7.53.2",
     "react-hot-toast": "^2.4.1",
     "react-intersection-observer": "^9.13.1",
+    "tailwind-merge": "^2.5.5",
+    "tailwindcss-animate": "^1.0.7",
     "yup": "^1.4.0"
   },
   "devDependencies": {
