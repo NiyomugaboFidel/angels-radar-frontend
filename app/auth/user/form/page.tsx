@@ -2,7 +2,7 @@
 
 import { Lock } from "lucide-react";
 import Image from "next/image";
-import { useState} from "react";
+import { ChangeEventHandler, FormEvent, useState} from "react";
 import useChooseAccountType from "@/app/hooks/users/useChooseAcountType";
 import QuoteAnimation from "@/app/components/animations/quoteAnimation";
 import Button from "@/app/components/common/Button";
@@ -104,10 +104,10 @@ const ChooseRole = () => {
     })
   };
 
-  const handleSubmit = ()=>{
-
-
-  }
+  const handleSubmit = (e:FormEvent) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+    console.log("Form submitted!");
+  };
 
 
   return (
@@ -220,6 +220,7 @@ const ChooseRole = () => {
   );
 };
 
+
 // Forms component remains the same as in previous version
 
 export default ChooseRole;
@@ -248,8 +249,8 @@ export const Forms: React.FC<{
   const categories = [
     "Technology",
     "Healthcare",
-    "Industrial Goods and Services",
     "Consumer Goods",
+    "Energy",
     "Telecommunications",
     "Real Estate",
     "Transportation",
@@ -258,7 +259,7 @@ export const Forms: React.FC<{
     "Financial Services",
     "Utilities",
     "Materials",
-    "Energy",
+    "Industrial Goods and Services",
     "Consumer Services",
     "Big data",
     "Fashion",
@@ -274,12 +275,12 @@ export const Forms: React.FC<{
 
         <div className="w-full flex flex-col items-center justify-center">
         
-              <div className=" grid  grid-flow-row-dense grid-cols-3 w-full  gap-2">
+              <div className=" grid grid-cols-3 w-full  gap-2">
                 {categories.map((category, index) => (
                   <button
                     key={index}
                     onClick={() => handleClick(category)}
-                    className={`col-span-${index}  py-2 space-x-1 rounded-full text-sm w-full leading-sm text-center font-[400]  transition-all duration-300 transform
+                    className={` py-2 px-1  rounded-full text-sm  leading-sm text-center font-[400]  transition-all duration-300 transform
                       ${
                         activeCategories.includes(category)
                           ? "bg-primaryColor text-white "
