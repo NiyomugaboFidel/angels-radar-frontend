@@ -20,18 +20,10 @@ interface UserProfileData {
 
 }
 
-import * as Yup from 'yup';
-const formValidationSchema = Yup.object().shape({
-  mon: Yup.number().required('Account type is required'),
-  email:Yup.string().email('Email invalid').required('Email is required'),
-  name:Yup.string().required('Name is required'),
-  phone:Yup.number().required("phone is required")
- 
 
-  });
 
 const ChooseRole = () => {
-  const { mutate: acountType, } = useChooseAccountType();
+
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState<number>(0);
 
@@ -52,15 +44,8 @@ const ChooseRole = () => {
   type FormFields = "name" | "email" | "phone" | "mon";
 
   const handleNext = async () => {
-    const fieldsToValidate = {
-      0: ["name"],
-      1: ["email"],
-      2: ["phone"],
-      3: ["mon"]
-    }[currentPage] as FormFields[];
-  
-    const isValid = await methods.trigger(fieldsToValidate);
-    if (isValid && currentPage < titles.length - 1) {
+
+    if ( currentPage < titles.length - 1) {
       setDirection(1);
       setCurrentPage((prev) => prev + 1);
     }
@@ -124,20 +109,7 @@ const ChooseRole = () => {
 
   }
 
-  const methods = useForm({
-    resolver: yupResolver(formValidationSchema),
-    defaultValues: {
-      email:"",
-      name:"",
-      phone: 0,
-      mon: 0
 
-    },
-  });
-  const onSubmit = async (data: UserProfileData | any) => {
-    console.log("Form Data:", data);
-
-  };
   return (
     <div className="min-h-screen h-full flex overflow-hidden bg-white p-8 lg:p-0">
       <div className="w-full flex">
@@ -173,8 +145,7 @@ const ChooseRole = () => {
         <div className="w-full h-full overflow-hidden lg:w-1/2 flex pt-20 justify-center">
         
           <div className="max-w-[427px] w-full">
-          <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <AnimatePresence mode="wait">
               <motion.h1 
                 key={`title-${currentPage}`}
@@ -238,7 +209,7 @@ const ChooseRole = () => {
               </Button>
             </div>
             </form>
-            </FormProvider>
+    
             <p className="pt-[15px] text-sm flex items-center justify-start gap-1 text-color2">
               <Lock className="text-sm w-[14px]" /> Your Info is safely secured
             </p>
@@ -258,49 +229,82 @@ export const Forms: React.FC<{
   page: number;
 }> = ({ page,  }) => {
 
+  const [activeCategories, setActiveCategories] = useState<string[]>([]);
+
+  // Handle button click
+  const handleClick = (category: string) => {
+    // Check if the category is already active
+    if (activeCategories.includes(category)) {
+      // Remove category if already active
+      setActiveCategories((prev) => prev.filter((cat) => cat !== category));
+    } else {
+ 
+        setActiveCategories((prev) => [...prev, category]);
+ 
+    }
+  };
 
 
+  const categories = [
+    "Technology",
+    "Healthcare",
+    "Industrial Goods and Services",
+    "Consumer Goods",
+    "Telecommunications",
+    "Real Estate",
+    "Transportation",
+    "Retail",
+    "Agriculture",
+    "Financial Services",
+    "Utilities",
+    "Materials",
+    "Energy",
+    "Consumer Services",
+    "Big data",
+    "Fashion",
+    "Food & Drinks",
+  ];
+  
+  
   switch (page) {
     case 0: // User Preference Form
       return (
-        <div className="max-w-[427px] mx-auto ">
-    <FormField
-        type="text"
-        name="name"
-        placeholder="Name"
-      />
-      </div>
+        <div className="space-y-1">
+
+
+        <div className="w-full flex flex-col items-center justify-center">
+        
+              <div className=" grid  grid-flow-row-dense grid-cols-3 w-full  gap-2">
+                {categories.map((category, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleClick(category)}
+                    className={`col-span-${index}  py-2 space-x-1 rounded-full text-sm w-full leading-sm text-center font-[400]  transition-all duration-300 transform
+                      ${
+                        activeCategories.includes(category)
+                          ? "bg-primaryColor text-white "
+                          : "bg-gray-100 text-color1 hover:bg-gray-200"
+                      }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
+        
+        
+                </div>
       );
     case 1: // Personal Information Form
       return (
-        <div className="space-y-4">
-        <FormField
-        type="text"
-        name="email"
-        placeholder="Email"
-      />
+         <div className="space-y-1">
+
+  <h3>Hello</h3>
+
+
         </div>
       );
-    case 2: // Project Details Form
-      return (
-        <div className="space-y-4">
-       <FormField
-        type="tel"
-        name="phone"
-        placeholder="Phone number"
-      />
-        </div>
-      );
-    case 3: // Funding Goals Form
-      return (
-        <div className="space-y-4">
-       <FormField
-        type="number"
-        name="mon"
-        placeholder="Money"
-      />
-        </div>
-      );
+
     default:
       return null;
   }
