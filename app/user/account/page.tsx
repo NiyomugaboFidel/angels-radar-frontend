@@ -6,11 +6,13 @@ import QuoteAnimation from "@/app/components/animations/quoteAnimation";
 import Button from "@/app/components/common/Button";
 import { motion, AnimatePresence } from "framer-motion";
 import { Forms, SubmitConfirmationModal } from "./_test";
+import { useRouter } from "next/navigation";
 
 const ChooseRole = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState<number>(0);
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
+  const route = useRouter();
   const [formData, setFormData] = useState({
     selectedCategories: "[]",
     theme: "",
@@ -48,6 +50,8 @@ const ChooseRole = () => {
     if (currentPage > 0) {
       setDirection(-1);
       setCurrentPage((prev) => prev - 1);
+    }else{
+      route.push('/auth/user');
     }
   };
 
@@ -155,7 +159,7 @@ const ChooseRole = () => {
           </div>
 
           {/* Right side with form */}
-          <div className="w-full h-full overflow-hidden lg:w-1/2 flex pt-20 justify-center">
+          <div className="w-full h-full overflow-hidden lg:w-1/2 flex pt-5 justify-center">
             <div className="max-w-[427px] w-full">
               <form
                 onSubmit={
@@ -213,7 +217,7 @@ const ChooseRole = () => {
                 <div className="flex gap-4 pt-[30px]">
                   <Button
                     onClick={handlePrev}
-                    disabled={currentPage === 0}
+                    // disabled={currentPage === 0}
                     type="button"
                     variant="secondary"
                   >

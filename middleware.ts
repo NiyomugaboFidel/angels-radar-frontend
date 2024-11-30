@@ -34,5 +34,5 @@ function redirectToSignIn(request: NextRequest): NextResponse {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/"], 
+  matcher: ["/dashboard/:path*", "/", "/user/:path*" , "/auth/user"], 
 };

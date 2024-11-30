@@ -8,10 +8,12 @@ import { useState, useEffect } from "react";
 import useChooseAccountType from "@/app/hooks/users/useChooseAcountType";
 import Cookies from "js-cookie";
 import QuoteAnimation from "../animations/quoteAnimation";
+import { useRouter } from "next/navigation";
 
 const ChooseRole = () => {
   const { mutate: acountType, isPending } = useChooseAccountType();
   const [isActive, setIsActive] = useState<string>("");
+  const route = useRouter()
 
   useEffect(() => {
     // Safely access localStorage and Cookies here
@@ -25,6 +27,14 @@ const ChooseRole = () => {
     setIsActive(role);
     acountType({ role });
   };
+
+  const handlerContinue = ()=>{
+   route.push('/user/account')
+  }
+  const handlerBack = ()=>{
+   route.back();
+   handlerIsActive("")
+  }
   return (
     <div className=" min-h-screen h-full flex overflow-hidden bg-white p-8 lg:p-0">
       <div className="w-full flex">
@@ -126,13 +136,13 @@ const ChooseRole = () => {
 
             <div className="flex gap-4 pt-[30px]">
               <Button
-                onClick={() => handlerIsActive("")}
+                onClick={handlerBack}
                 type="button"
                 variant="secondary"
               >
                 Back
               </Button>
-              <Button onClick={() => {}} type="submit" variant="primary">
+              <Button onClick={handlerContinue} type="submit" variant="primary">
                 Save and continue
               </Button>
             </div>
