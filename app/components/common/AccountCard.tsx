@@ -1,5 +1,3 @@
-'use client'
-import { useState } from "react";
 
 interface AccountProps {
     isActive: boolean;
@@ -16,11 +14,12 @@ interface AccountProps {
   }) => {
     return (
       <div
-        className={`flex items-center px-4 py-3 rounded-md ${
+        className={`flex items-center px-4 py-3 rounded-md w-full ${
           isActive ? "bg-gray-50 border-secondaryColor border" : "bg-white shadow"
         } hover:bg-green-50 transition-all ease-in-out duration-100`}
       >
-        <div
+      <div>
+      <div
           className={`w-[52px] h-[52px] rounded-full ${
             isActive
               ? "bg-green-500"
@@ -29,9 +28,10 @@ interface AccountProps {
         >
           {icon}
         </div>
-        <div>
+      </div>
+        <div className="w-full">
           <div className="flex w-full justify-between items-center">
-            <h3 className="font-medium text-color1 text-[18px] leading-[27px]">{title}</h3>
+            <h3 className="font-medium text-color1 md:text-[18px] leading-[27px]">{title}</h3>
             {isActive && (
               <div className="ml-2 w-4 h-4 rounded-full bg-secondaryColor text-white flex items-center justify-center transition-all ease-in-out duration-100">
                 <svg
@@ -49,7 +49,7 @@ interface AccountProps {
               </div>
             )}
           </div>
-          <p className="text-color2 text-sm leading-sm ">{description}</p>
+          <p className="text-color2 text-sm leading-sm w-full text-start flex items-center justify-start">{description}</p>
         </div>
       </div>
     );
