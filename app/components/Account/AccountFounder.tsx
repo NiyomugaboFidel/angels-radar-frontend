@@ -6,20 +6,21 @@ import QuoteAnimation from "@/app/components/animations/quoteAnimation";
 import Button from "@/app/components/common/Button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
-import {Forms2, SubmitConfirmationModal } from "./Tools";
+import { Forms2} from "./Tools";
+import toast from "react-hot-toast";
 
-const AccountFounder = () => {
+const AccountInvestor = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState<number>(0);
-  const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
   const route = useRouter();
   const [formData, setFormData] = useState({
     selectedCategories: "[]",
-    theme: "",
-    mode: "",
-    option: "",
+    companyStage: "",
+    impactCriteria: "",
+    investmentsTypes: "",
   });
   const titles = ["Select your Industry", "Company Information"];
+  const titleTags = ["Interests", "Company info"];
   const pageLength = titles.length - 1;
 
   const subTitles = [
@@ -45,36 +46,24 @@ const AccountFounder = () => {
       setCurrentPage((prev) => prev + 1);
     }
   };
-
   const handlePrev = () => {
     if (currentPage > 0) {
       setDirection(-1);
       setCurrentPage((prev) => prev - 1);
-    }else{
-      route.push('/auth/user');
+    } else {
+      route.push("/auth/user");
     }
-  };
-
-  const handleSubmitConfirmation = () => {
-    setIsReadyToSubmit(true);
   };
 
   const handleFinalSubmit = (e: FormEvent) => {
     e.preventDefault();
-
-    // Perform final validation
     const isFormValid = Object.values(formData).every((value) => value !== "");
-
     if (isFormValid) {
       console.log("Form submitted with data:", formData);
-      // Add your submit logic here (e.g., API call)
-      setIsReadyToSubmit(false);
     } else {
-      alert("Please fill in all required fields before submitting.");
-      setIsReadyToSubmit(false);
+      toast("ℹ️ Please fill in all required fields before submitting.");
     }
   };
-
   const titleVariants = {
     initial: { opacity: 0, y: 20 },
     animate: {
@@ -122,13 +111,6 @@ const AccountFounder = () => {
 
   return (
     <>
-      {isReadyToSubmit && (
-        <SubmitConfirmationModal
-          onClose={() => setIsReadyToSubmit(false)}
-          onConfirm={handleFinalSubmit}
-          formData={formData}
-        />
-      )}
       <div className="min-h-screen h-full flex overflow-hidden bg-white p-8 lg:p-0">
         <div className="w-full flex">
           {/* Left side with background image and quote */}
@@ -159,15 +141,35 @@ const AccountFounder = () => {
           </div>
 
           {/* Right side with form */}
-          <div className="w-full h-full overflow-hidden lg:w-1/2 flex pt-5 justify-center">
-            <div className="max-w-[427px] w-full">
+          <div className="w-full h-full overflow-hidden lg:w-1/2 flex pt-5 justify-center items-center">
+            <div className=" md:max-w-[600px] lg:max-w-[500px] xl:max-w-[500px] 2xl:max-w-[650px] w-full">
+              {/* page count */}
+              <div className="flex justify-end items-center ">
+                <div className=" transition-all ease-in-out duration-300 ">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={`subtitle-${currentPage}`}
+                      variants={titleVariants}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      className=""
+                    >
+                      <p className="text-color1 text-[16px] leading-[27px]">
+                        <span> Step </span> 0{currentPage + 1}/0{titles.length}
+                      </p>
+                      <p className="text-sm leading-sm text-color2">
+                        {titleTags[currentPage]}
+                      </p>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+
               <form
                 onSubmit={
-                  currentPage === pageLength
-                    ? handleSubmitConfirmation
-                    : handleNext
+                  currentPage === pageLength ? handleFinalSubmit : handleNext
                 }
-                className="space-y-4"
               >
                 <AnimatePresence mode="wait">
                   <motion.h1
@@ -176,7 +178,7 @@ const AccountFounder = () => {
                     initial="initial"
                     animate="animate"
                     exit="exit"
-                    className="text-lg leading-lg font-[500] text-color1 mb-2"
+                    className="text-[32px] leading-[40px] font-[500] text-color1"
                   >
                     {titles[currentPage]}
                   </motion.h1>
@@ -210,41 +212,42 @@ const AccountFounder = () => {
                       onChange={handleInputChange}
                       formData={formData}
                       page={currentPage}
+                      setFormData={setFormData}
                     />
+
+                    <div className="flex gap-4 pt-[30px]">
+                      <Button
+                        onClick={handlePrev}
+                        // disabled={currentPage === 0}
+                        type="button"
+                        variant="secondary"
+                      >
+                        Back
+                      </Button>
+                      <Button
+                        // onClick={handleNext}
+                        type={"button"}
+                        variant="primary"
+                        onClick={handleFinalSubmit}
+                        className={`${
+                          currentPage === pageLength ? "block" : "hidden"
+                        }`}
+                      >
+                        {"Submit"}
+                      </Button>
+                      <Button
+                        onClick={handleNext}
+                        type={"button"}
+                        variant="primary"
+                        className={`${
+                          currentPage === pageLength ? "hidden" : "block"
+                        }`}
+                      >
+                        {"Save and continue"}
+                      </Button>
+                    </div>
                   </motion.div>
                 </AnimatePresence>
-
-                <div className="flex gap-4 pt-[30px]">
-                  <Button
-                    onClick={handlePrev}
-                    // disabled={currentPage === 0}
-                    type="button"
-                    variant="secondary"
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    // onClick={handleNext}
-                    type={"button"}
-                    variant="primary"
-                    onClick={handleSubmitConfirmation}
-                    className={`${
-                      currentPage === pageLength ? "block" : "hidden"
-                    }`}
-                  >
-                    {"Review and Submit"}
-                  </Button>
-                  <Button
-                    onClick={handleNext}
-                    type={"button"}
-                    variant="primary"
-                    className={`${
-                      currentPage === pageLength ? "hidden" : "block"
-                    }`}
-                  >
-                    {"Save and continue"}
-                  </Button>
-                </div>
               </form>
 
               <p className="pt-[15px] text-sm flex items-center justify-start gap-1 text-color2">
@@ -259,5 +262,4 @@ const AccountFounder = () => {
   );
 };
 
-export default AccountFounder;
-
+export default AccountInvestor;

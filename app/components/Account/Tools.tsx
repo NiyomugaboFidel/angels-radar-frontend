@@ -183,6 +183,37 @@ export const Forms: React.FC<{
             </Select>
           </div>
         
+          {/* fouth Select */}
+          <div className="flex flex-col gap-1">
+            <label htmlFor="ticketSize" className=" px-1 text-sm font-medium text-color1">
+            Ticket Size
+            </label>
+            <Select 
+              value={formData.ticketSize || ""}
+              onValueChange={(value) => {
+                onChange({
+                  target: {
+                    name: "ticketSize",
+                    value: value,
+                    type: 'select-one'
+                  }
+                } as React.ChangeEvent<HTMLSelectElement>);
+              }}
+            >
+              <SelectTrigger id="ticketSize" className="w-full outline-none focus:right-0">
+                <SelectValue placeholder="Select" className="text-color2"  />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="$0 - $4999">$0 - $4,999</SelectItem>
+                <SelectItem value="$5000 - $9999">$5,000 - $9,999</SelectItem>
+                <SelectItem value="$50000 - $99999">$50,000 - $99,999</SelectItem>
+                <SelectItem value="$100000 - $499999">$100,000 - $499,999</SelectItem>
+                <SelectItem value="$500000 - $999999">$500,000 - $999,999</SelectItem>
+                <SelectItem value="$1000000+">$1,000,000+</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        
         </div>
       );
 
@@ -194,12 +225,13 @@ export const Forms: React.FC<{
 export const Forms2: React.FC<{
   page: number;
   formData: any;
+  setFormData : any
   onChange: (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => void;
-}> = ({ page, formData, onChange }) => {
+}> = ({ page, formData, onChange, setFormData }) => {
   // Parse categories safely
   const initialCategories = formData.selectedCategories 
     ? JSON.parse(formData.selectedCategories) 
@@ -268,9 +300,57 @@ export const Forms2: React.FC<{
       );
     case 1: // Personal Information Form
       return (
-     <div>
-        <input type="text" placeholder="Company Name" className={`w-full px-3 py-2 border rounded-md focus:ring-1 focus:ring-primaryColor outline-none border-gray-300 `} />
+  <div className="flex flex-col gap-3">
+       <div>
+        <label htmlFor="companyName">Company name</label>
+        <input 
+  type="text" 
+  value={formData.ticketSize || ""} 
+  onChange={(event: React.ChangeEvent<HTMLInputElement>) => 
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value, // Dynamically update the form data
+    })
+  }
+  name="ticketSize" // Ensure the name matches the key in the state
+  placeholder="Enter company name" 
+  className="w-full px-3 py-2 border rounded-md focus:ring-1 focus:ring-primaryColor outline-none border-gray-300" 
+/>
+
      </div>
+     <div>
+     <div className="flex flex-col gap-1">
+            <label htmlFor="jobTitleInCompany" className=" px-1 text-sm font-medium text-color1">
+            Job title in company
+            </label>
+            <Select 
+              value={formData.ticketSize || ""}
+              onValueChange={(value) => {
+                onChange({
+                  target: {
+                    name: "ticketSize",
+                    value: value,
+                    type: 'select-one'
+                  }
+                } as React.ChangeEvent<HTMLSelectElement>);
+              }}
+            >
+              <SelectTrigger id="jobTitleInCompany" className="w-full outline-none focus:right-0">
+                <SelectValue placeholder="Select" className="text-color2"  />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="$0 - $4999">$0 - $4,999</SelectItem>
+                <SelectItem value="$5000 - $9999">$5,000 - $9,999</SelectItem>
+                <SelectItem value="$50000 - $99999">$50,000 - $99,999</SelectItem>
+                <SelectItem value="$100000 - $499999">$100,000 - $499,999</SelectItem>
+                <SelectItem value="$500000 - $999999">$500,000 - $999,999</SelectItem>
+                <SelectItem value="$1000000+">$1,000,000+</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        
+     </div>
+  </div>
       );
 
     default:
@@ -279,61 +359,4 @@ export const Forms2: React.FC<{
 };
 
 
-export  const SubmitConfirmationModal = ({ 
-  onClose, 
-  onConfirm, 
-  formData 
-}: { 
-  onClose: () => void, 
-  onConfirm: (e:FormEvent) => void, 
-  formData: Record<string, string> 
-}) => {
-  return (
-    <div 
-      className=""
-      onClick={onClose}
-    >
-      <div 
-        className=""
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">Confirm Submission</h2>
-        </div>
-        
-        <div className="space-y-4 mb-6">
-          <p className="text-gray-600">Please review your information before submitting:</p>
-          
-          {Object.entries(formData).map(([key, value]) => (
-            <div 
-              key={key} 
-              className="flex justify-between bg-gray-100 p-2 rounded"
-            >
-              <span className="font-medium capitalize">
-                {key.replace(/([A-Z])/g, ' $1').toLowerCase()}:
-              </span>
-              <span className="text-gray-700">
-                {value || 'Not provided'}
-              </span>
-            </div>
-          ))}
-        </div>
-        
-        <div className="flex justify-end space-x-4">
-          <Button 
-            onClick={onClose} 
-            variant="secondary"
-          >
-            Edit Information
-          </Button>
-          <Button 
-            onClick={onConfirm} 
-            variant="primary"
-          >
-            Confirm Submission
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-};
+
