@@ -16,10 +16,8 @@ const ChooseRole = () => {
   const route = useRouter();
 
   useEffect(() => {
-    // Safely access localStorage and Cookies here
-    const storedRole =
-      localStorage.getItem("role") || Cookies.get("role") || "";
-    console.log({ storedRole });
+
+    const storedRole = Cookies.get("role") || "";
     setIsActive(storedRole);
   }, []);
 

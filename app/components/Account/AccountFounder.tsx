@@ -50,7 +50,7 @@ const AccountInvestor = () => {
       setDirection(-1);
       setCurrentPage((prev) => prev - 1);
     } else {
-      route.push("/auth/user");
+      route.push("/user/account/role");
     }
   };
 

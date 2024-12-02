@@ -130,7 +130,8 @@ const SignUpForm = () => {
               variant="secondary"
               className="w-full   py-2 px-4 rounded-md flex items-center justify-center space-x-2  transition-colors"
             >
-              <Image
+          <div className="flex gap-2">
+          <Image
                width={20}
                height={20}
                 src="/google.svg"
@@ -138,6 +139,7 @@ const SignUpForm = () => {
                 className="h-5 w-5"
               />
               <span>Sign up with Google</span>
+          </div>
             </Button>
           </form>
         </FormProvider>

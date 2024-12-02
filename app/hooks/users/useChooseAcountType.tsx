@@ -8,18 +8,14 @@ const useChooseAccountType = () => {
     mutationFn: (data: ChooseAccountTypePayload) => chooseAcountType(data),
     onSuccess: (data) => {
       toast.success(`Account type Changed to " ${data.user.role} " successful!`);
-    //   console.log("new role:",data.user.role)
-      localStorage.setItem("role",data.user.role);
- 
+  
       Cookies.set(
         "role",
         data.user.role,
         { expires: 7, path: "/" }
       );
 
-    //   setTimeout(() => {
-    //     router.push(`/auth/user`);
-    //   }, 1500);
+
     },
     onError: (error: any) => {
       const errorMessage = error.response?.data.errors

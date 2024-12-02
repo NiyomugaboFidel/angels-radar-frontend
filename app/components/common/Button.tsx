@@ -22,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={`
-        w-full py-2 px-4 rounded-[5px] font-medium transition-colors 
+        flex items-center justify-center  w-full py-2 px-4 rounded-[5px] font-medium transition-colors 
         text-[14px] leading-[17px] relative
         ${variants[variant]} 
         ${className}

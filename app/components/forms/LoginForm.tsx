@@ -101,16 +101,18 @@ const LoginForm = () => {
             <Button
               type="button"
               variant="secondary"
-              className="w-full   py-2 px-4 rounded-md flex items-center justify-center space-x-2  transition-colors"
+              className="w-full flex   py-2 px-4 rounded-md  items-center justify-center space-x-2  transition-colors"
             >
-              <Image
+                <div className="flex gap-2">
+          <Image
                width={20}
                height={20}
                 src="/google.svg"
                 alt="Google logo"
                 className="h-5 w-5"
               />
-              <span>Sign in with Google</span>
+              <span>Sign up with Google</span>
+          </div>
             </Button>
           </form>
         </FormProvider>

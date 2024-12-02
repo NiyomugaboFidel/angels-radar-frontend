@@ -19,7 +19,7 @@ const Page = () => {
 
     if (!userRole) {
  
-      router.push("/auth/user");
+      router.push("/user/account/role");
     }
   }, [router]);
 
