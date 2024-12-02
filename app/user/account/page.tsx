@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import AccountInvestor from "@/app/components/Account/AccountInvestor";
 import AccountFounder from "@/app/components/Account/AccountFounder";
 import Loading from "@/app/components/common/loading";
+import Forbidden from "@/app/403/page";
 
 const Page = () => {
   const [role, setRole] = useState<string | undefined>(undefined); // State to track role
@@ -37,7 +38,9 @@ const Page = () => {
   }
 
 
-  return <div>Error: Invalid role</div>;
+  return <div>
+    <Forbidden />
+  </div>;
 };
 
 export default Page;

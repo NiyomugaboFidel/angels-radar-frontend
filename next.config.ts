@@ -1,16 +1,23 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Enables optimized server-side rendering or standalone builds
+  output: 'standalone',
+
+  // Redirects configuration
   async redirects() {
     return [
       {
-        source: '/old-route',
-        destination: '/new-route',
-        permanent: true,
+        source: '/old-route', // The route to be redirected
+        destination: '/new-route', // The new route
+        permanent: true, // Indicates a 301 (permanent) redirect
       },
     ];
   },
+
+
+  reactStrictMode: true, 
+  swcMinify: true, 
 };
 
 export default nextConfig;
