@@ -92,9 +92,10 @@ const LoginForm = () => {
               type="submit"
               variant="primary"
               disabled={isLoading}
+              isLoading={isLoading}
               className="w-full hover:bg-[#052666] text-white py-2  transition-colors disabled:bg-primaryColor"
             >
-              {isLoading ? "Signing in..." : "Sign in"}
+              {"Sign in"}
             </Button>
 
             <Button

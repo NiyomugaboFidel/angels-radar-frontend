@@ -14,10 +14,9 @@ const AccountInvestor = () => {
   const [direction, setDirection] = useState<number>(0);
   const route = useRouter();
   const [formData, setFormData] = useState({
-    selectedCategories: "[]",
-    companyStage: "",
-    impactCriteria: "",
-    investmentsTypes: "",
+    jobTitleInCompany: "",
+    companyName: "",
+
   });
   const titles = ["Select your Industry", "Company Information"];
   const titleTags = ["Interests", "Company info"];

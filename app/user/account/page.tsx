@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import AccountInvestor from "@/app/components/Account/AccountInvestor";
 import AccountFounder from "@/app/components/Account/AccountFounder";
+import Loading from "@/app/components/common/loading";
 
 const Page = () => {
   const [role, setRole] = useState<string | undefined>(undefined); // State to track role
@@ -22,7 +23,9 @@ const Page = () => {
   }, [router]);
 
   if (role === undefined) {
-    return <div>Loading...</div>;
+    return <div>
+      <Loading />
+    </div>;
   }
 
   if (role === "investor") {

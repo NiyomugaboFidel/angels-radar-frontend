@@ -151,11 +151,11 @@ const EmailVerification = () => {
                   </Button>
                   <Button
                    disabled ={isLoading}
-
+                    isLoading={isLoading}
                     type="submit"
                     variant="primary"
                   >
-                  {isLoading ? "  Verify...":"Verify" }
+                  {"Verify" }
                   </Button>
                 </div>
               </form>

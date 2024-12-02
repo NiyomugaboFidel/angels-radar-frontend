@@ -118,10 +118,11 @@ const SignUpForm = () => {
             <Button
               type="submit"
               variant="primary"
+              isLoading={isLoading}
               disabled={isLoading || !termsAccepted}
               className="w-full hover:bg-[#052666] text-white py-2  transition-colors disabled:bg-primaryColor"
             >
-              {isLoading ? "Signing up..." : "Sign up"}
+              { "Sign up"}
             </Button>
 
             <Button

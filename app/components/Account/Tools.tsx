@@ -1,15 +1,12 @@
-'use client'
-import Button from "@/app/components/common/Button";
+"use client";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { X } from "lucide-react";
-import { FormEvent, useCallback } from "react";
-
+} from "@/components/ui/select";
+import {useCallback } from "react";
 
 export const Forms: React.FC<{
   page: number;
@@ -21,51 +18,71 @@ export const Forms: React.FC<{
   ) => void;
 }> = ({ page, formData, onChange }) => {
   // Parse categories safely
-  const initialCategories = formData.selectedCategories 
-    ? JSON.parse(formData.selectedCategories) 
+  const initialCategories = formData.selectedCategories
+    ? JSON.parse(formData.selectedCategories)
     : [];
 
   const categories = [
-    "Technology", "Healthcare", "Consumer Goods", "Energy", "Telecommunications", 
-    "Real Estate", "Transportation", "Retail", "Agriculture", "Financial Services", 
-    "Utilities", "Materials", "Industrial Goods and Services", "Consumer Services", 
-    "Big data", "Fashion", "Food & Drinks",
+    "Technology",
+    "Healthcare",
+    "Consumer Goods",
+    "Energy",
+    "Telecommunications",
+    "Real Estate",
+    "Transportation",
+    "Retail",
+    "Agriculture",
+    "Financial Services",
+    "Utilities",
+    "Materials",
+    "Industrial Goods and Services",
+    "Consumer Services",
+    "Big data",
+    "Fashion",
+    "Food & Drinks",
   ];
 
-  const handleCategoryClick = useCallback((category: string) => {
-    const currentCategories = initialCategories;
-    let newCategories;
+  const handleCategoryClick = useCallback(
+    (category: string) => {
+      const currentCategories = initialCategories;
+      let newCategories;
 
-    // If category is already selected, remove it
-    if (currentCategories.includes(category)) {
-      newCategories = currentCategories.filter((cat: string) => cat !== category);
-    }
-    // Limit to max 5 categories
-    else if (currentCategories.length < 5) {
-      newCategories = [...currentCategories, category];
-    }
-    // If already at max, replace the first selected category
-    else {
-      newCategories = [...currentCategories.slice(1), category];
-    }
-
-    // Trigger onChange with the new categories
-    onChange({
-      target: {
-        name: "selectedCategories",
-        value: JSON.stringify(newCategories),
-        type: 'select-multiple'
+      // If category is already selected, remove it
+      if (currentCategories.includes(category)) {
+        newCategories = currentCategories.filter(
+          (cat: string) => cat !== category
+        );
       }
-    } as React.ChangeEvent<HTMLSelectElement>);
-  }, [initialCategories, onChange]);
-  
+      // Limit to max 5 categories
+      else if (currentCategories.length < 5) {
+        newCategories = [...currentCategories, category];
+      }
+      // If already at max, replace the first selected category
+      else {
+        newCategories = [...currentCategories.slice(1), category];
+      }
+
+      // Trigger onChange with the new categories
+      onChange({
+        target: {
+          name: "selectedCategories",
+          value: JSON.stringify(newCategories),
+          type: "select-multiple",
+        },
+      } as React.ChangeEvent<HTMLSelectElement>);
+    },
+    [initialCategories, onChange]
+  );
+
   switch (page) {
     case 0: // User Preference Form
       return (
         <div className="space-y-4">
           <p className="text-sm text-gray-600 mb-2">
-            Select up to 5 categories of interest 
-            {initialCategories.length > 0 ? ` (${initialCategories.length} selected)` : ""}
+            Select up to 5 categories of interest
+            {initialCategories.length > 0
+              ? ` (${initialCategories.length} selected)`
+              : ""}
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 w-full gap-3">
             {categories.map((category, index) => (
@@ -91,23 +108,29 @@ export const Forms: React.FC<{
         <div className="flex w-full flex-col gap-4">
           {/* First Select */}
           <div className="flex flex-col gap-1">
-            <label htmlFor="preferredCompanyStage" className=" px-1 text-sm font-medium text-color1">
-             Preferred company stage
+            <label
+              htmlFor="preferredCompanyStage"
+              className=" px-1 text-sm font-medium text-color1"
+            >
+              Preferred company stage
             </label>
-            <Select 
+            <Select
               value={formData.companyStage || ""}
               onValueChange={(value) => {
                 onChange({
                   target: {
                     name: "companyStage",
                     value: value,
-                    type: 'select-one'
-                  }
+                    type: "select-one",
+                  },
                 } as React.ChangeEvent<HTMLSelectElement>);
               }}
             >
-              <SelectTrigger id="preferredCompanyStage" className="w-full outline-none focus:right-0">
-              <SelectValue placeholder="Select" className="text-color2" />
+              <SelectTrigger
+                id="preferredCompanyStage"
+                className="w-full outline-none focus:right-0"
+              >
+                <SelectValue placeholder="Select" className="text-color2" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="idea">Idea</SelectItem>
@@ -119,26 +142,32 @@ export const Forms: React.FC<{
               </SelectContent>
             </Select>
           </div>
-        
+
           {/* Second Select */}
           <div className="flex flex-col gap-1">
-            <label htmlFor="investmentsTypes" className=" px-1 text-sm font-medium text-color1">
-            Investments Types
+            <label
+              htmlFor="investmentsTypes"
+              className=" px-1 text-sm font-medium text-color1"
+            >
+              Investments Types
             </label>
-            <Select 
+            <Select
               value={formData.investmentsTypes || ""}
               onValueChange={(value) => {
                 onChange({
                   target: {
                     name: "investmentsTypes",
                     value: value,
-                    type: 'select-one'
-                  }
+                    type: "select-one",
+                  },
                 } as React.ChangeEvent<HTMLSelectElement>);
               }}
             >
-              <SelectTrigger id="investmentsTypes" className="w-full outline-none focus:right-0">
-               <SelectValue placeholder="Select" className="text-color2" />
+              <SelectTrigger
+                id="investmentsTypes"
+                className="w-full outline-none focus:right-0"
+              >
+                <SelectValue placeholder="Select" className="text-color2" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="debt">Debt</SelectItem>
@@ -150,27 +179,32 @@ export const Forms: React.FC<{
               </SelectContent>
             </Select>
           </div>
-      
-        
+
           {/* Third Select */}
           <div className="flex flex-col gap-1">
-            <label htmlFor="investmentsTypes" className=" px-1 text-sm font-medium text-color1">
-            Impact criteria
+            <label
+              htmlFor="investmentsTypes"
+              className=" px-1 text-sm font-medium text-color1"
+            >
+              Impact criteria
             </label>
-            <Select 
+            <Select
               value={formData.impactCriteria || ""}
               onValueChange={(value) => {
                 onChange({
                   target: {
                     name: "impactCriteria",
                     value: value,
-                    type: 'select-one'
-                  }
+                    type: "select-one",
+                  },
                 } as React.ChangeEvent<HTMLSelectElement>);
               }}
             >
-              <SelectTrigger id="investmentsTypes" className="w-full outline-none focus:right-0">
-                <SelectValue placeholder="Select" className="text-color2"  />
+              <SelectTrigger
+                id="investmentsTypes"
+                className="w-full outline-none focus:right-0"
+              >
+                <SelectValue placeholder="Select" className="text-color2" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="debt">Debt</SelectItem>
@@ -182,38 +216,44 @@ export const Forms: React.FC<{
               </SelectContent>
             </Select>
           </div>
-        
+
           {/* fouth Select */}
           <div className="flex flex-col gap-1">
-            <label htmlFor="ticketSize" className=" px-1 text-sm font-medium text-color1">
-            Ticket Size
+            <label
+              htmlFor="ticketSize"
+              className=" px-1 text-sm font-medium text-color1"
+            >
+              Ticket Size
             </label>
-            <Select 
+            <Select
               value={formData.ticketSize || ""}
               onValueChange={(value) => {
                 onChange({
                   target: {
                     name: "ticketSize",
                     value: value,
-                    type: 'select-one'
-                  }
+                    type: "select-one",
+                  },
                 } as React.ChangeEvent<HTMLSelectElement>);
               }}
             >
-              <SelectTrigger id="ticketSize" className="w-full outline-none focus:right-0">
-                <SelectValue placeholder="Select" className="text-color2"  />
+              <SelectTrigger
+                id="ticketSize"
+                className="w-full outline-none focus:right-0"
+              >
+                <SelectValue placeholder="Select" className="text-color2" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="$0 - $4999">$0 - $4,999</SelectItem>
-                <SelectItem value="$5000 - $9999">$5,000 - $9,999</SelectItem>
-                <SelectItem value="$50000 - $99999">$50,000 - $99,999</SelectItem>
-                <SelectItem value="$100000 - $499999">$100,000 - $499,999</SelectItem>
-                <SelectItem value="$500000 - $999999">$500,000 - $999,999</SelectItem>
-                <SelectItem value="$1000000+">$1,000,000+</SelectItem>
-              </SelectContent>
+  <SelectItem value="0-4999">$0 - $4,999</SelectItem>
+  <SelectItem value="5000-9999">$5,000 - $9,999</SelectItem>
+  <SelectItem value="50000-99999">$50,000 - $99,999</SelectItem>
+  <SelectItem value="100000-499999">$100,000 - $499,999</SelectItem>
+  <SelectItem value="500000-999999">$500,000 - $999,999</SelectItem>
+  <SelectItem value="1000000+">$1,000,000+</SelectItem>
+</SelectContent>
+
             </Select>
           </div>
-        
         </div>
       );
 
@@ -225,7 +265,7 @@ export const Forms: React.FC<{
 export const Forms2: React.FC<{
   page: number;
   formData: any;
-  setFormData : any
+  setFormData: any;
   onChange: (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -233,130 +273,162 @@ export const Forms2: React.FC<{
   ) => void;
 }> = ({ page, formData, onChange, setFormData }) => {
   // Parse categories safely
-  const initialCategories = formData.selectedCategories 
-    ? JSON.parse(formData.selectedCategories) 
+  const initialCategories = formData.selectedCategories
+    ? JSON.parse(formData.selectedCategories)
     : [];
 
   const categories = [
-    "Technology", "Healthcare", "Consumer Goods", "Energy", "Telecommunications", 
-    "Real Estate", "Transportation", "Retail", "Agriculture", "Financial Services", 
-    "Utilities", "Materials", "Industrial Goods and Services", "Consumer Services", 
-    "Big data", "Fashion", "Food & Drinks" ,
+    "Technology",
+    "Healthcare",
+    "Consumer Goods",
+    "Energy",
+    "Telecommunications",
+    "Real Estate",
+    "Transportation",
+    "Retail",
+    "Agriculture",
+    "Financial Services",
+    "Utilities",
+    "Materials",
+    "Industrial Goods and Services",
+    "Consumer Services",
+    "Big data",
+    "Fashion",
+    "Food & Drinks",
   ];
 
-  const handleCategoryClick = useCallback((category: string) => {
-    const currentCategories = initialCategories;
-    let newCategories;
+  const handleCategoryClick = useCallback(
+    (category: string) => {
+      const currentCategories = initialCategories;
+      let newCategories;
 
-    // If category is already selected, remove it
-    if (currentCategories.includes(category)) {
-      newCategories = currentCategories.filter((cat: string) => cat !== category);
-    }
-    // Limit to max 5 categories
-    else if (currentCategories.length < 5) {
-      newCategories = [...currentCategories, category];
-    }
-    // If already at max, replace the first selected category
-    else {
-      newCategories = [...currentCategories.slice(1), category];
-    }
-
-    // Trigger onChange with the new categories
-    onChange({
-      target: {
-        name: "selectedCategories",
-        value: JSON.stringify(newCategories),
-        type: 'select-multiple'
+      // If category is already selected, remove it
+      if (currentCategories.includes(category)) {
+        newCategories = currentCategories.filter(
+          (cat: string) => cat !== category
+        );
       }
-    } as React.ChangeEvent<HTMLSelectElement>);
-  }, [initialCategories, onChange]);
-  
+      // Limit to max 5 categories
+      else if (currentCategories.length < 5) {
+        newCategories = [...currentCategories, category];
+      }
+      // If already at max, replace the first selected category
+      else {
+        newCategories = [...currentCategories.slice(1), category];
+      }
+
+      // Trigger onChange with the new categories
+      onChange({
+        target: {
+          name: "selectedCategories",
+          value: JSON.stringify(newCategories),
+          type: "select-multiple",
+        },
+      } as React.ChangeEvent<HTMLSelectElement>);
+    },
+    [initialCategories, onChange]
+  );
+
   switch (page) {
     case 0: // User Preference Form
       return (
         <div className="space-y-4">
-          <p className="text-sm text-gray-600 mb-2">
-            Select up to 5 categories of interest 
-            {initialCategories.length > 0 ? ` (${initialCategories.length} selected)` : ""}
-          </p>
-          <div className="grid grid-cols-3 w-full gap-2">
-            {categories.map((category, index) => (
-              <button
-                key={index}
-                type="button"
-                onClick={() => handleCategoryClick(category)}
-                className={`py-2 px-1 rounded-full text-sm leading-sm text-center font-[400] transition-all duration-300 transform
-                  ${
-                    initialCategories.includes(category)
-                      ? "bg-primaryColor text-white"
-                      : "bg-gray-100 text-color1 hover:bg-gray-200"
-                  }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
+        <p className="text-sm text-gray-600 mb-2">
+          Select up to 5 categories of interest
+          {initialCategories.length > 0
+            ? ` (${initialCategories.length} selected)`
+            : ""}
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 w-full gap-3">
+          {categories.map((category, index) => (
+            <button
+              key={index}
+              type="button"
+              onClick={() => handleCategoryClick(category)}
+              className={`py-2 px-1 rounded-full text-sm leading-sm text-center font-[400] transition-all duration-300 transform
+                ${
+                  initialCategories.includes(category)
+                    ? "bg-primaryColor text-white"
+                    : "bg-gray-100 text-color1 hover:bg-gray-200"
+                }`}
+            >
+              {category}
+            </button>
+          ))}
         </div>
+      </div>
       );
     case 1: // Personal Information Form
       return (
-  <div className="flex flex-col gap-3">
-       <div>
-        <label htmlFor="companyName">Company name</label>
-        <input 
-  type="text" 
-  value={formData.ticketSize || ""} 
-  onChange={(event: React.ChangeEvent<HTMLInputElement>) => 
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value, // Dynamically update the form data
-    })
-  }
-  name="ticketSize" // Ensure the name matches the key in the state
-  placeholder="Enter company name" 
-  className="w-full px-3 py-2 border rounded-md focus:ring-1 focus:ring-primaryColor outline-none border-gray-300" 
-/>
-
-     </div>
-     <div>
-     <div className="flex flex-col gap-1">
-            <label htmlFor="jobTitleInCompany" className=" px-1 text-sm font-medium text-color1">
-            Job title in company
-            </label>
-            <Select 
-              value={formData.ticketSize || ""}
-              onValueChange={(value) => {
-                onChange({
-                  target: {
-                    name: "ticketSize",
-                    value: value,
-                    type: 'select-one'
-                  }
-                } as React.ChangeEvent<HTMLSelectElement>);
-              }}
-            >
-              <SelectTrigger id="jobTitleInCompany" className="w-full outline-none focus:right-0">
-                <SelectValue placeholder="Select" className="text-color2"  />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="$0 - $4999">$0 - $4,999</SelectItem>
-                <SelectItem value="$5000 - $9999">$5,000 - $9,999</SelectItem>
-                <SelectItem value="$50000 - $99999">$50,000 - $99,999</SelectItem>
-                <SelectItem value="$100000 - $499999">$100,000 - $499,999</SelectItem>
-                <SelectItem value="$500000 - $999999">$500,000 - $999,999</SelectItem>
-                <SelectItem value="$1000000+">$1,000,000+</SelectItem>
-              </SelectContent>
-            </Select>
+        <div className="flex flex-col gap-3">
+          <div>
+            <label htmlFor="companyName">Company name</label>
+            <input
+              type="text"
+              value={formData.companyName || ""}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setFormData({
+                  ...formData,
+                  [event.target.name]: event.target.value,
+                })
+              }
+              name="companyName" // Ensure the name matches the key in the state
+              placeholder="Enter company name"
+              className="w-full px-3 py-2 border rounded-md focus:ring-1 focus:ring-primaryColor outline-none border-gray-300"
+            />
           </div>
-        
-     </div>
-  </div>
+          <div>
+            <div className="flex flex-col gap-1">
+              <label
+                htmlFor="jobTitleInCompany"
+                className=" px-1 text-sm font-medium text-color1"
+              >
+                Job title in company
+              </label>
+              <Select
+                value={formData.jobTitleInCompany || ""}
+                onValueChange={(value) => {
+                  onChange({
+                    target: {
+                      name: "jobTitleInCompany",
+                      value: value,
+                      type: "select-one",
+                    },
+                  } as React.ChangeEvent<HTMLSelectElement>);
+                }}
+              >
+                <SelectTrigger
+                  id="jobTitleInCompany"
+                  className="w-full outline-none focus:right-0"
+                >
+                  <SelectValue placeholder="Select" className="text-color2" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="cio">
+                    Chief Information Officer (CIO)
+                  </SelectItem>
+                  <SelectItem value="cto">
+                    Chief Technology Officer (CTO)
+                  </SelectItem>
+                  <SelectItem value="ceo">
+                    Chief Executive Officer (CEO)
+                  </SelectItem>
+                  <SelectItem value="cfo">
+                    Chief Financial Officer (CFO)
+                  </SelectItem>
+                  <SelectItem value="manager">Manager</SelectItem>
+                  <SelectItem value="developer">Developer</SelectItem>
+                  <SelectItem value="designer">Designer</SelectItem>
+                  <SelectItem value="consultant">Consultant</SelectItem>
+                  <SelectItem value="intern">Intern</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
       );
 
     default:
       return null;
   }
 };
-
-
-
