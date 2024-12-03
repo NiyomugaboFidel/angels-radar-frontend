@@ -33,7 +33,7 @@ const Button: React.FC<ButtonProps> = ({
     >
       {isLoading && (
         <span className="absolute inset-0 flex items-center justify-center">
-          <span className={`w-5 h-5 border-3  border-t-2  ${ variant === "primary" ? "border-t-white border-white/10" : " border-black/20 border-t-primaryColor"} rounded-full animate-spin`}></span>
+          <span className={`w-5 h-5 border-2  border-t-2  ${ variant === "primary" ? "border-t-white border-white/10" : " border-black/20 border-t-primaryColor"} rounded-full animate-spin`}></span>
         </span>
       )}
       <span className={isLoading ? 'invisible' : ''}>
