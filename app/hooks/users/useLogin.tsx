@@ -12,11 +12,11 @@ const useLogin = () => {
       toast.success("Sign in successful!");
       localStorage.setItem("ANGELS_RADAR_JWT", data.token);
 
-      Cookies.set("user", JSON.stringify(data.user), { expires: 7, path: "/" });
-      Cookies.set("ANGELS_RADAR_JWT", data.token, { expires: 7, path: "/" });
+      Cookies.set("user", JSON.stringify(data.user), { expires: 1, path: "/" });
+      Cookies.set("ANGELS_RADAR_JWT", data.token, { expires: 1, path: "/" });
 
 
-      Cookies.set("role", data.user.role, { expires: 7, path: "/" });
+      Cookies.set("role", data.user.role, { expires: 1, path: "/" });
 
       setTimeout(() => {
         router.push(`/`);

@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { FaMoneyBillWave, FaChartLine, FaHandshake, FaRocket } from "react-icons/fa";
 
 interface CardProps {
   logo: string;
@@ -29,44 +30,74 @@ const CompanyCard: React.FC<CardProps> = ({
   fundingRequired,
 }) => {
   return (
-    <div className="bg-white shadow-lg rounded-lg p-4 hover:shadow-xl transition-shadow">
-      {/* Logo and Header */}
-      <div className="flex items-center mb-4">
-        <Image src={logo} alt={`${companyName} logo`} width={50} height={50} className="rounded-full" />
-        <div className="ml-4">
-          <h3 className="text-lg font-bold">{companyName}</h3>
-          <p className="text-sm text-gray-600">{tagline}</p>
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden border hover:shadow-xl transition-shadow">
+      {/* Header */}
+      <div className="relative">
+        <Image
+          src="/images/background.png" // Placeholder for the card header background
+          alt="Card Background"
+          layout="responsive"
+          width={300}
+          height={100}
+          className="object-cover"
+        />
+        <div className="absolute top-4 left-4 flex items-center gap-3">
+          <Image
+            src={logo}
+            alt={`${companyName} logo`}
+            width={60}
+            height={60}
+            className="rounded-full border-4 border-white shadow-md"
+          />
+          <div>
+            <h3 className="text-lg font-bold text-white">{companyName}</h3>
+            <p className="text-sm text-gray-300">{tagline}</p>
+          </div>
         </div>
       </div>
 
       {/* Description */}
-      <p className="text-sm text-gray-700 mb-4">{description}</p>
+      <div className="p-6">
+        <p className="text-gray-700 text-sm mb-4">{description}</p>
 
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2 mb-4">
-        {tags.map((tag, index) => (
-          <span
-            key={index}
-            className="bg-blue-100 text-blue-600 text-xs font-medium px-2 py-1 rounded"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {tags.map((tag, index) => (
+            <span
+              key={index}
+              className="bg-blue-100 text-blue-600 text-xs font-medium px-3 py-1 rounded-full"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
 
-      {/* Details */}
-      <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
-        <div>
-          <p><strong>Valuation:</strong> {valuation}</p>
-          <p><strong>Stage:</strong> {stage}</p>
-        </div>
-        <div>
-          <p><strong>Investment Type:</strong> {investmentType}</p>
-          <p><strong>Growth Rate:</strong> {growthRate}</p>
-        </div>
-        <div>
-          <p><strong>MRR:</strong> {mrr}</p>
-          <p><strong>Funding:</strong> {fundingRequired}</p>
+        {/* Details */}
+        <div className="grid grid-cols-2 gap-4 text-sm">
+          <div className="flex items-center gap-2">
+            <FaMoneyBillWave className="text-blue-600" />
+            <span className="text-gray-800">{valuation}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <FaRocket className="text-blue-600" />
+            <span className="text-gray-800">{stage}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <FaHandshake className="text-blue-600" />
+            <span className="text-gray-800">{investmentType}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <FaChartLine className="text-blue-600" />
+            <span className="text-gray-800">{growthRate}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <FaMoneyBillWave className="text-blue-600" />
+            <span className="text-gray-800">{mrr}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <FaMoneyBillWave className="text-blue-600" />
+            <span className="text-gray-800">{fundingRequired}</span>
+          </div>
         </div>
       </div>
     </div>

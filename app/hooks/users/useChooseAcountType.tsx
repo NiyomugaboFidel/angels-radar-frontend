@@ -12,7 +12,7 @@ const useChooseAccountType = () => {
       Cookies.set(
         "role",
         data.user.role,
-        { expires: 7, path: "/" }
+        { expires:1, path: "/" }
       );
 
 
