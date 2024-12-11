@@ -59,11 +59,11 @@ export default function Home() {
   const [isActive, setIsActive] = useState("watchlist")
   return (
     <div className="w-full h-full  min-h-screen ">
-      <div className="w-full h-full flex items-center">
-        <div className=" bg-white min-h-screen hidden lg:flex lg:w-1/5 h-full ">
+      <div className="w-full h-full flex items-center bg-[#F2F3F9]">
+        <div className=" min-h-screen hidden lg:flex lg:w-1/5 h-full ">
           <Sidebar isActive={isActive} setIsActive={setIsActive} />
         </div>
-        <div className="bg-white min-h-screen hidden lg:flex lg:w-4/5 h-full p-5">
+        <div className="bg-[#F2F3F9] min-h-screen hidden lg:flex lg:w-4/5 h-full p-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
       {companies.map((company, index) => (
         <CompanyCard key={index} {...company} />

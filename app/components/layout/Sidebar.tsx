@@ -85,7 +85,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive, setIsActive }) => {
   ];
 
   return (
-    <div className="text-color1 shadow-md w-full  flex flex-col  justify-center">
+    <div className="bg-[#ffffff] text-color1 shadow-lg w-full  flex flex-col  justify-center">
       {/* Logo Section */}
       <Link className=" p-2 xl:p-5" href="/">
         <div className="flex justify-start items-center gap-1">
