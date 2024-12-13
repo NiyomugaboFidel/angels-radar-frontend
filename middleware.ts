@@ -19,7 +19,7 @@ export async function middleware(request: NextRequest) {
     const role = payload.role || request.cookies.get("role")?.value;
     // console.log({role})
     if (role !== "investor" && role !== "owner") {
-      return NextResponse.redirect(new URL("/user/account/role", request.url));
+      return NextResponse.redirect(new URL("/user/role", request.url));
     }
   } catch (error) {
     console.error("JWT Verification Error:", error);
@@ -34,5 +34,5 @@ function redirectToSignIn(request: NextRequest): NextResponse {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/", "/user/:path*" ,], 
+  matcher: ["/dashboard/:path*", "/", "/account/:path*"], 
 };

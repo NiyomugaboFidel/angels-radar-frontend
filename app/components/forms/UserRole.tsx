@@ -27,7 +27,7 @@ const ChooseRole = () => {
   };
 
   const handlerContinue = () => {
-    route.push("/user/account");
+    route.push("/account/profile");
   };
   const handlerBack = () => {
     route.back();

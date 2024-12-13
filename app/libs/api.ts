@@ -42,3 +42,8 @@ export const chooseAcountType = async (data : ChooseAccountTypePayload) => {
 //   console.log('Response:',response);
   return response.data; 
 };
+export const logOut = async () => {
+  const response = await api.post('/users/logout', {});
+//   console.log('Response:',response);
+  return response.data; 
+};

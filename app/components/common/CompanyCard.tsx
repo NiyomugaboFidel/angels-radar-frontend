@@ -30,7 +30,7 @@ const CompanyCard: React.FC<CardProps> = ({
   fundingRequired,
 }) => {
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden border hover:shadow-xl transition-shadow">
+    <div className="h-full bg-white shadow-lg rounded-lg overflow-hidden border hover:shadow-xl transition-shadow">
       {/* Header */}
       <div className="relative">
         <Image
