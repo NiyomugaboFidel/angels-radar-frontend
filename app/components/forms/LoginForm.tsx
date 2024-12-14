@@ -36,7 +36,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className=" bg-white min-h-[70vh] w-full md:w-[440px] rounded-[10px] p-[30px]">
+    <div className=" bg-white h-full  w-full md:w-[440px] rounded-[10px] p-[30px]">
       <div className="w-full h-full">
         <div className="flex items-center justify-center flex-col gap-[20px]">
           {/* Logo */}

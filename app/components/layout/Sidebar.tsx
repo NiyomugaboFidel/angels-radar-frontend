@@ -1,4 +1,5 @@
 import useLogout from "@/app/hooks/users/useLogout";
+import {X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -6,9 +7,10 @@ import React from "react";
 interface SidebarProps {
   isActive?: string;
   setIsActive?: (value: string) => void;
+  setIsOpen: (value:boolean) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isActive, setIsActive }) => {
+const Sidebar: React.FC<SidebarProps> = ({ isActive, setIsActive, setIsOpen }) => {
   const { mutate: logout, isPending, error} = useLogout();
   const buttons = [
     {
@@ -91,8 +93,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive, setIsActive }) => {
 
 
   return (
-    <div className="bg-[#ffffff] text-color1 shadow-lg w-full  flex flex-col  justify-center">
-      {/* Logo Section */}
+    <div className="bg-[#ffffff] text-color1 z-[100]  shadow-lg w-full  flex flex-col  justify-center">
+          <div className="flex w-full justify-between items-center p-3 gap-5 ">
+                  {/* Logo Section */}
       <Link className=" p-2 xl:p-5" href="/">
         <div className="flex justify-start items-center gap-1">
           <Image
@@ -104,7 +107,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive, setIsActive }) => {
           <span className="text-[24px] font-bold">Angels Radar</span>
         </div>
       </Link>
+        <button className=" lg:hidden p-2 bg-[#c3dcf3af] rounded-full " onClick={()=> setIsOpen(false)}>
+          <X className="text-primaryColor" />
+        </button>
 
+          </div>
       {/* Sidebar Buttons */}
       <div className="flex flex-col gap-2 border-[#ECEDEF] border-b-2 h-[70vh] ">
         <div className="p-5 w-full h-full flex flex-col gap-2">
