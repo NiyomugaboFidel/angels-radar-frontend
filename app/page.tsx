@@ -69,8 +69,8 @@ export default function Home() {
         <div className={` ${isOpen ? 'left-0':' -left-full'} transition-all duration-500 ease-in-out fixed top-0 lg:relative h-screen  z-[100]  lg:flex lg:w-1/5  `}>
           <Sidebar setIsOpen={setIsOpen}  isActive={isActive} setIsActive={setIsActive} />
         </div>
-        <div className="bg-[#F2F3F9] items-start justify-start  flex lg:w-4/5 h-full p-5">
-        <div className="grid grid-cols-1 h-full sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="bg-[#F2F3F9] items-start justify-start  flex w-full h-full p-5">
+        <div className="grid grid-cols-1 h-full sm:grid-cols-2 xl:grid-cols-3 gap-2">
       {companies.map((company, index) => (
         <CompanyCard key={index} {...company} />
       ))}

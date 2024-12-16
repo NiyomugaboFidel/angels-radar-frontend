@@ -1,5 +1,5 @@
 import useLogout from "@/app/hooks/users/useLogout";
-import {X } from "lucide-react";
+import { X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -7,11 +7,15 @@ import React from "react";
 interface SidebarProps {
   isActive?: string;
   setIsActive?: (value: string) => void;
-  setIsOpen: (value:boolean) => void;
+  setIsOpen: (value: boolean) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isActive, setIsActive, setIsOpen }) => {
-  const { mutate: logout, isPending, error} = useLogout();
+const Sidebar: React.FC<SidebarProps> = ({
+  isActive,
+  setIsActive,
+  setIsOpen,
+}) => {
+  const { mutate: logout, isPending, error } = useLogout();
   const buttons = [
     {
       id: "watchlist",
@@ -87,31 +91,32 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive, setIsActive, setIsOpen }) =
     },
   ];
 
-  const onSubmit = ()=>{
+  const onSubmit = () => {
     logout();
-  }
-
+  };
 
   return (
     <div className="bg-[#ffffff] text-color1 z-[100]  shadow-lg w-full  flex flex-col  justify-center">
-          <div className="flex w-full justify-between items-center p-3 gap-5 ">
-                  {/* Logo Section */}
-      <Link className=" p-2 xl:p-5" href="/">
-        <div className="flex justify-start items-center gap-1">
-          <Image
-            height={30}
-            width={30}
-            src="/logo.svg"
-            alt="Angels Radar Logo"
-          />
-          <span className="text-[24px] font-bold">Angels Radar</span>
-        </div>
-      </Link>
-        <button className=" lg:hidden p-2 bg-[#c3dcf3af] rounded-full " onClick={()=> setIsOpen(false)}>
+      <div className="flex w-full justify-between items-center p-3 gap-5 ">
+        {/* Logo Section */}
+        <Link className=" p-2 w-full " href="/">
+          <div className="flex justify-start items-center gap-1">
+            <Image
+              height={30}
+              width={30}
+              src="/logo.svg"
+              alt="Angels Radar Logo"
+            />
+            <span className="text-[18px] font-bold">Angels Radar</span>
+          </div>
+        </Link>
+        <button
+          className=" lg:hidden p-2 bg-[#c3dcf3af] rounded-full "
+          onClick={() => setIsOpen(false)}
+        >
           <X className="text-primaryColor" />
         </button>
-
-          </div>
+      </div>
       {/* Sidebar Buttons */}
       <div className="flex flex-col gap-2 border-[#ECEDEF] border-b-2 h-[70vh] ">
         <div className="p-5 w-full h-full flex flex-col gap-2">
@@ -121,9 +126,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive, setIsActive, setIsOpen }) =
               onClick={() => setIsActive?.(button.id)}
               className={`${
                 isActive === button.id
-                  ? "bg-primaryColor text-white"
-                  : "bg-transparent"
-              } group cursor-pointer p-2 hover:bg-primaryColor hover:text-white text-sm w-full rounded-[5px] flex items-center gap-3`}
+                  ? "bg-primaryColor text-white hover:bg-primaryColor"
+                  : "bg-transparent hover:bg-gray-100"
+              } group cursor-pointer p-2  text-sm w-full rounded-[5px] flex items-center gap-3`}
             >
               {button.icon(isActive === button.id)}
               {button.label}
@@ -137,9 +142,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive, setIsActive, setIsOpen }) =
           onClick={() => setIsActive?.("about")}
           className={`${
             isActive === "about"
-              ? "bg-primaryColor text-white"
-              : "bg-transparent"
-          } group cursor-pointer p-2 hover:bg-primaryColor hover:text-white text-sm w-full rounded-[5px] flex items-center gap-3`}
+              ? "bg-primaryColor text-white hover:bg-primaryColor"
+              : "bg-transparent hover:bg-gray-100"
+          } group cursor-pointer p-2  text-sm w-full rounded-[5px] flex items-center gap-3`}
         >
           <svg
             width="16"
@@ -155,7 +160,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive, setIsActive, setIsOpen }) =
           </svg>
           About Angles Radar
         </button>
-        <button onClick={onSubmit} className="group cursor-pointer p-2 hover:bg-red-500 bg-red-600 text-white text-sm w-full rounded-[5px] flex items-center gap-3">
+        <button
+          onClick={onSubmit}
+          className="group cursor-pointer p-2 hover:bg-red-500 bg-red-600 text-white text-sm w-full rounded-[5px] flex items-center gap-3"
+        >
           <svg
             width="16"
             height="16"

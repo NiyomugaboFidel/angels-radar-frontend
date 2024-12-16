@@ -1,6 +1,11 @@
 import React from "react";
 import Image from "next/image";
-import { FaMoneyBillWave, FaChartLine, FaHandshake, FaRocket } from "react-icons/fa";
+import {
+  FaMoneyBillWave,
+  FaChartLine,
+  FaHandshake,
+  FaRocket,
+} from "react-icons/fa";
 
 interface CardProps {
   logo: string;
@@ -30,73 +35,91 @@ const CompanyCard: React.FC<CardProps> = ({
   fundingRequired,
 }) => {
   return (
-    <div className="h-full bg-white shadow-lg rounded-lg overflow-hidden border hover:shadow-xl transition-shadow">
+    <div className="h-full flex flex-col gap-5 bg-white  rounded-[10px] overflow-hidden border-[#ECEDEF] border-[1.5px]  transition-shadow w-full">
       {/* Header */}
-      <div className="relative">
-        <Image
-          src="/images/background.png" // Placeholder for the card header background
-          alt="Card Background"
-          layout="responsive"
-          width={300}
-          height={100}
-          className="object-cover"
-        />
-        <div className="absolute top-4 left-4 flex items-center gap-3">
-          <Image
-            src={logo}
-            alt={`${companyName} logo`}
-            width={60}
-            height={60}
-            className="rounded-full border-4 border-white shadow-md"
-          />
-          <div>
-            <h3 className="text-lg font-bold text-white">{companyName}</h3>
-            <p className="text-sm text-gray-300">{tagline}</p>
+      <div>
+        <div
+          className="relative bg-cover bg-center bg-no-repeat h-[55px]"
+          style={{ backgroundImage: "url('/images/background.png')" }}
+        >
+          <div className="absolute top-10 left-4 flex items-end gap-3 justify-end">
+            <Image
+              src={logo}
+              alt={`${companyName} logo`}
+              width={50}
+              height={50}
+              className="rounded-full border-2 border-white shadow-md"
+            />
+            <div className="">
+              <p className=" text-sm leading-sm font-[500] text-color1">
+                {companyName}
+              </p>
+              <p className="text-[12px] leading-[14px] text-color">{tagline}</p>
+            </div>
           </div>
         </div>
       </div>
-
       {/* Description */}
-      <div className="p-6">
-        <p className="text-gray-700 text-sm mb-4">{description}</p>
+      <div className="">
+        <div className=" border-b-[1.5px] pt-4 border-[#ECEDEF]  ">
+          <div className="p-2 pb-0">
+            <p className="text-color2 text-[12px] leading-[15px] mb-4">
+              {description}
+            </p>
 
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {tags.map((tag, index) => (
-            <span
-              key={index}
-              className="bg-blue-100 text-blue-600 text-xs font-medium px-3 py-1 rounded-full"
-            >
-              {tag}
-            </span>
-          ))}
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2 mb-4">
+              {tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className="bg-blue-100 text-primaryColor text-xs font-medium px-3 py-2 rounded-full"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
-
         {/* Details */}
-        <div className="grid grid-cols-2 gap-4 text-sm">
-          <div className="flex items-center gap-2">
-            <FaMoneyBillWave className="text-blue-600" />
-            <span className="text-gray-800">{valuation}</span>
+        <div className="p-2 py-4 grid grid-cols-2 gap-2 text-sm">
+          <div className="flex items-start justify-start gap-2">
+            <FaMoneyBillWave className="text-primaryColor" />
+            <span className="text-gray-800 flex items-center gap-1">
+              {valuation} <p className="text-[10px] text-color2">valuation</p>
+            </span>
           </div>
-          <div className="flex items-center gap-2">
-            <FaRocket className="text-blue-600" />
-            <span className="text-gray-800">{stage}</span>
+          <div className="flex items-center gap-1">
+            <FaRocket className="text-primaryColor" />
+            <span className="text-gray-800 flex items-center gap-1">
+              {stage}
+              <p className="text-[10px] text-color2"> Stage</p>
+            </span>
           </div>
-          <div className="flex items-center gap-2">
-            <FaHandshake className="text-blue-600" />
-            <span className="text-gray-800">{investmentType}</span>
+          <div className="flex items-center gap-1">
+            <FaHandshake className="text-primaryColor" />
+            <span className="text-gray-800 flex items-center gap-1">
+              {investmentType}{" "}
+              <p className="text-[10px] text-color2">InvestmentType</p>
+            </span>
           </div>
-          <div className="flex items-center gap-2">
-            <FaChartLine className="text-blue-600" />
-            <span className="text-gray-800">{growthRate}</span>
+          <div className="flex items-center gap-1">
+            <FaChartLine className="text-primaryColor" />
+            <span className="text-gray-800 flex items-center gap-1">
+              {growthRate}
+              <p className="text-[10px] text-color2"> GrowthRate </p>
+            </span>
           </div>
-          <div className="flex items-center gap-2">
-            <FaMoneyBillWave className="text-blue-600" />
-            <span className="text-gray-800">{mrr}</span>
+          <div className="flex items-center gap-1">
+            <FaMoneyBillWave className="text-primaryColor" />
+            <span className="text-gray-800 flex items-center gap-1">
+              {mrr} <p className="text-[10px] text-color2">MRR</p>
+            </span>
           </div>
-          <div className="flex items-center gap-2">
-            <FaMoneyBillWave className="text-blue-600" />
-            <span className="text-gray-800">{fundingRequired}</span>
+          <div className="flex items-start justify-start gap-1">
+            <FaMoneyBillWave className="text-primaryColor" />
+            <span className="text-gray-800 flex items-center gap-1">
+              {fundingRequired} <p className="text-[10px] text-color2">fundingRequired</p>
+            </span>
           </div>
         </div>
       </div>
