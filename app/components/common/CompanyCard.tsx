@@ -40,7 +40,7 @@ const CompanyCard: React.FC<CardProps> = ({
       <div>
         <div
           className="relative bg-cover bg-center bg-no-repeat h-[55px]"
-          style={{ backgroundImage: "url('/images/background.png')" }}
+          style={{ backgroundImage: "url('https://res.cloudinary.com/dmosnjgob/image/upload/v1734416639/background_rqhrzq.png')" }}
         >
           <div className="absolute top-10 left-4 flex items-end gap-3 justify-end">
             <Image

@@ -64,7 +64,7 @@ export default {
   			'lg': '40.48px'
   		},
   		backgroundImage: {
-  			'form-bg': "url('/images/background.png')"
+  			'form-bg': "url('https://res.cloudinary.com/dmosnjgob/image/upload/v1734416639/background_rqhrzq.png')"
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
