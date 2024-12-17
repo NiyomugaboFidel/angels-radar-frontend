@@ -162,7 +162,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         </button>
         <button
           onClick={onSubmit}
-          className="group cursor-pointer p-2 hover:bg-red-500 bg-red-600 text-white text-sm w-full rounded-[5px] flex items-center gap-3"
+          className="group cursor-pointer p-2 hover:bg-gray-100  text-sm w-full rounded-[5px] flex items-center gap-3"
         >
           <svg
             width="16"
