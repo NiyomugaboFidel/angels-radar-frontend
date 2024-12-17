@@ -72,7 +72,7 @@ const CompanyCard: React.FC<CardProps> = ({
               {tags.map((tag, index) => (
                 <span
                   key={index}
-                  className="bg-blue-100 text-primaryColor text-xs font-medium px-3 py-2 rounded-full"
+                  className="bg-blue-50 text-primaryColor text-xs font-medium px-3 py-2 rounded-full"
                 >
                   {tag}
                 </span>
@@ -118,7 +118,8 @@ const CompanyCard: React.FC<CardProps> = ({
           <div className="flex items-start justify-start gap-1">
             <FaMoneyBillWave className="text-primaryColor" />
             <span className="text-gray-800 flex items-center gap-1">
-              {fundingRequired} <p className="text-[10px] text-color2">fundingRequired</p>
+              {fundingRequired}{" "}
+              <p className="text-[10px] text-color2">fundingRequired</p>
             </span>
           </div>
         </div>

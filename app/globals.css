@@ -19,16 +19,21 @@ html{
 ::-webkit-scrollbar{
   width:10px ;
   border-radius: 25px;
+  overflow: hidden;
 }
 ::-webkit-scrollbar-track{
-  background: #f1f1f1;
+  background: #eff6ff;
+  padding-top:5px ;
+  padding-bottom: 5px;
 }
 ::-webkit-scrollbar-thumb{
-  background: #ccc;
+  background: #073763;
   border-radius: 30px;
+
 }
 ::-webkit-scrollbar-thumb:hover{
-  background: #bbb;
+  background: #073763;
+
 }
 
 
