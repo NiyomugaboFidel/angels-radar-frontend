@@ -6,20 +6,23 @@ import QuoteAnimation from "@/app/components/animations/quoteAnimation";
 import Button from "@/app/components/common/Button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { Forms} from "./Tools";
+import { Forms } from "./Tools";
 import toast from "react-hot-toast";
+import useCreateInvestor from "@/app/hooks/profile/useCreateInvestor";
+import { createInvestorType } from "@/app/libs/investor";
 
 const AccountInvestor = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState<number>(0);
   const route = useRouter();
   const [formData, setFormData] = useState({
-    selectedCategories: "[]",
+    interestedTags: "[]",
     companyStage: "",
-    impactCriteria: "",
-    investmentsTypes: "",
-    ticketSize:""
+    companyType: "",
+    investmentsType: "",
+    ticketSize: "",
   });
+  const { mutate: investor, isPending, error } = useCreateInvestor();
   const titles = ["What are your interests?", "User Preference"];
   const titleTags = ["Interests", "User Preference"];
   const pageLength = titles.length - 1;
@@ -60,9 +63,19 @@ const AccountInvestor = () => {
     e.preventDefault();
     const isFormValid = Object.values(formData).every((value) => value !== "");
     if (isFormValid) {
-      console.log("Form submitted with data:", formData);
+      const data = {
+        interestedTags: JSON.parse(formData.interestedTags),
+        companyType: formData.companyType,
+        investmentsType: formData.investmentsType,
+        companyStage: formData.companyStage,
+        ticketSize: parseInt(formData.ticketSize),
+      };
+
+      // console.log("Form submitted with data:", data);
+      investor(data)
     } else {
       toast("ℹ️ Please fill in all required fields before submitting.");
+
     }
   };
   const titleVariants = {

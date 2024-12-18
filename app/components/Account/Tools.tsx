@@ -18,8 +18,8 @@ export const Forms: React.FC<{
   ) => void;
 }> = ({ page, formData, onChange }) => {
   // Parse categories safely
-  const initialCategories = formData.selectedCategories
-    ? JSON.parse(formData.selectedCategories)
+  const initialCategories = formData.interestedTags
+    ? JSON.parse(formData.interestedTags)
     : [];
 
   const categories = [
@@ -65,7 +65,7 @@ export const Forms: React.FC<{
       // Trigger onChange with the new categories
       onChange({
         target: {
-          name: "selectedCategories",
+          name: "interestedTags",
           value: JSON.stringify(newCategories),
           type: "select-multiple",
         },
@@ -146,17 +146,17 @@ export const Forms: React.FC<{
           {/* Second Select */}
           <div className="flex flex-col gap-1">
             <label
-              htmlFor="investmentsTypes"
+              htmlFor="investmentsType"
               className=" px-1 text-sm font-medium text-color1"
             >
               Investments Types
             </label>
             <Select
-              value={formData.investmentsTypes || ""}
+              value={formData.investmentsType || ""}
               onValueChange={(value) => {
                 onChange({
                   target: {
-                    name: "investmentsTypes",
+                    name: "investmentsType",
                     value: value,
                     type: "select-one",
                   },
@@ -164,7 +164,7 @@ export const Forms: React.FC<{
               }}
             >
               <SelectTrigger
-                id="investmentsTypes"
+                id="investmentsType"
                 className="w-full outline-none focus:right-0"
               >
                 <SelectValue placeholder="Select" className="text-color2" />
@@ -183,17 +183,17 @@ export const Forms: React.FC<{
           {/* Third Select */}
           <div className="flex flex-col gap-1">
             <label
-              htmlFor="investmentsTypes"
+              htmlFor="investmentsType"
               className=" px-1 text-sm font-medium text-color1"
             >
               Impact criteria
             </label>
             <Select
-              value={formData.impactCriteria || ""}
+              value={formData.companyType || ""}
               onValueChange={(value) => {
                 onChange({
                   target: {
-                    name: "impactCriteria",
+                    name: "companyType",
                     value: value,
                     type: "select-one",
                   },
@@ -201,7 +201,7 @@ export const Forms: React.FC<{
               }}
             >
               <SelectTrigger
-                id="investmentsTypes"
+                id="investmentsType"
                 className="w-full outline-none focus:right-0"
               >
                 <SelectValue placeholder="Select" className="text-color2" />
@@ -244,12 +244,12 @@ export const Forms: React.FC<{
                 <SelectValue placeholder="Select" className="text-color2" />
               </SelectTrigger>
               <SelectContent>
-  <SelectItem value="0-4999">$0 - $4,999</SelectItem>
-  <SelectItem value="5000-9999">$5,000 - $9,999</SelectItem>
-  <SelectItem value="50000-99999">$50,000 - $99,999</SelectItem>
-  <SelectItem value="100000-499999">$100,000 - $499,999</SelectItem>
-  <SelectItem value="500000-999999">$500,000 - $999,999</SelectItem>
-  <SelectItem value="1000000+">$1,000,000+</SelectItem>
+  <SelectItem value="4999">$0 - $4,999</SelectItem>
+  <SelectItem value="5000">$5,000 - $9,999</SelectItem>
+  <SelectItem value="50000">$50,000 - $99,999</SelectItem>
+  <SelectItem value="100000">$100,000 - $499,999</SelectItem>
+  <SelectItem value="500000">$500,000 - $999,999</SelectItem>
+  <SelectItem value="1000000">$1,000,000+</SelectItem>
 </SelectContent>
 
             </Select>
@@ -273,8 +273,8 @@ export const Forms2: React.FC<{
   ) => void;
 }> = ({ page, formData, onChange, setFormData }) => {
   // Parse categories safely
-  const initialCategories = formData.selectedCategories
-    ? JSON.parse(formData.selectedCategories)
+  const initialCategories = formData.interestedTags
+    ? JSON.parse(formData.interestedTags)
     : [];
 
   const categories = [
@@ -320,7 +320,7 @@ export const Forms2: React.FC<{
       // Trigger onChange with the new categories
       onChange({
         target: {
-          name: "selectedCategories",
+          name: "interestedTags",
           value: JSON.stringify(newCategories),
           type: "select-multiple",
         },

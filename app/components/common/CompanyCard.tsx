@@ -6,7 +6,9 @@ import {
   FaHandshake,
   FaRocket,
 } from "react-icons/fa";
-
+import { FaBookmark } from "react-icons/fa6";
+import { FaRegBookmark } from "react-icons/fa6";
+import { MdVerified } from "react-icons/md";
 interface CardProps {
   logo: string;
   companyName: string;
@@ -16,6 +18,7 @@ interface CardProps {
   valuation: string;
   stage: string;
   investmentType: string;
+  background: string;
   growthRate: string;
   mrr: string;
   fundingRequired: string;
@@ -33,6 +36,7 @@ const CompanyCard: React.FC<CardProps> = ({
   growthRate,
   mrr,
   fundingRequired,
+  background,
 }) => {
   return (
     <div className="h-full flex flex-col gap-5 bg-white  rounded-[10px] overflow-hidden border-[#ECEDEF] border-[1.5px]  transition-shadow w-full">
@@ -40,8 +44,12 @@ const CompanyCard: React.FC<CardProps> = ({
       <div>
         <div
           className="relative bg-cover bg-center bg-no-repeat h-[55px]"
-          style={{ backgroundImage: "url('https://res.cloudinary.com/dmosnjgob/image/upload/v1734416639/background_rqhrzq.png')" }}
+          style={{ backgroundImage: `url(${background})` }}
         >
+          <span className="w-full flex items-center justify-end p-2">
+            {/* <FaRegBookmark className="text-white" /> */}
+            <FaBookmark className="text-secondaryColor" />
+          </span>
           <div className="absolute top-10 left-4 flex items-end gap-3 justify-end">
             <Image
               src={logo}
@@ -51,9 +59,12 @@ const CompanyCard: React.FC<CardProps> = ({
               className="rounded-full border-2 border-white shadow-md"
             />
             <div className="">
+              <div className="flex items-center gap-2">
               <p className=" text-sm leading-sm font-[500] text-color1">
                 {companyName}
               </p>
+             <MdVerified className="text-secondaryColor" />
+              </div>
               <p className="text-[12px] leading-[14px] text-color">{tagline}</p>
             </div>
           </div>

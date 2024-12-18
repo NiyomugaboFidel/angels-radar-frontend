@@ -23,6 +23,7 @@ const useLogin = () => {
       }, 1500);
     },
     onError: (error: any) => {
+      console.log(error);
       const errorMessage = error.response?.data.errors
         ? error.response?.data.errors[0]
         : error.response?.data?.message || "Sign in failed. Please try again.";
