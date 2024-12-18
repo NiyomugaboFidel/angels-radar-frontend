@@ -2,6 +2,7 @@ import useLogout from "@/app/hooks/users/useLogout";
 import { X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
 interface SidebarProps {
@@ -11,10 +12,17 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
-  isActive,
   setIsActive,
   setIsOpen,
 }) => {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const section = searchParams.get('section');
+    const isActive = section
+    console.log(section)
+    const navigate = (section: string) => {
+      router.push(`/?section=${section}`);
+    };
   const { mutate: logout, isPending, error } = useLogout();
   const buttons = [
     {
@@ -123,7 +131,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           {buttons.map((button) => (
             <button
               key={button.id}
-              onClick={() => setIsActive?.(button.id)}
+              onClick={() => {navigate(button.id)}}
               className={`${
                 isActive === button.id
                   ? "bg-primaryColor text-white hover:bg-primaryColor"
@@ -139,7 +147,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Sidbar Footer  */}
       <div className="p-2 xl:p-5 flex items-start justify-center flex-col gap-2">
         <button
-          onClick={() => setIsActive?.("about")}
+          onClick={() =>{navigate('about')}}
           className={`${
             isActive === "about"
               ? "bg-primaryColor text-white hover:bg-primaryColor"

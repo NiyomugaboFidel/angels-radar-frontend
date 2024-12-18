@@ -130,7 +130,7 @@ const CompanyCard: React.FC<CardProps> = ({
             <FaMoneyBillWave className="text-primaryColor" />
             <span className="text-gray-800 flex items-center gap-1">
               {fundingRequired}{" "}
-              <p className="text-[10px] text-color2">fundingRequired</p>
+              <p className="text-[10px] text-color2">fundingRq</p>
             </span>
           </div>
         </div>
