@@ -57,8 +57,6 @@ export const companyData = {
 const DashboardPages = () => {
     const searchParams = useSearchParams();
     const section = searchParams.get('section');
-  
-    // console.log('section:',section)
     switch(section){
       case 'watchlist':
        return  <Watchlist />
@@ -76,7 +74,7 @@ const DashboardPages = () => {
        return  <About />
        break
       case 'company':
-       return  <CompanyProfile {...companyData} />
+       return  <CompanyProfile />
        break
     default:
        return <div>Select page</div>    

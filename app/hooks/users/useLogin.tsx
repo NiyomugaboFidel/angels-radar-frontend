@@ -17,10 +17,10 @@ const useLogin = () => {
 
 
       Cookies.set("role", data.user.role, { expires: 1, path: "/" });
-
-      setTimeout(() => {
-        router.push(`/`);
-      }, 1500);
+      router.push(`/`);
+      // setTimeout(() => {
+      //   router.push(`/`);
+      // }, 1500);
     },
     onError: (error: any) => {
       console.log(error);

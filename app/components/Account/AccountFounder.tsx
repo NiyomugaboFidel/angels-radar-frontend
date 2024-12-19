@@ -8,14 +8,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { Forms2} from "./Tools";
 import toast from "react-hot-toast";
+import useCreateCompany from "@/app/hooks/company/useCreateCompany";
 
 const AccountInvestor = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState<number>(0);
   const route = useRouter();
+  const {mutate:company, error, isPending} = useCreateCompany()
   const [formData, setFormData] = useState({
-    jobTitleInCompany: "",
+    jobTitle: "",
     companyName: "",
+    interestedTags:"[]"
 
   });
   const titles = ["Select your Industry", "Company Information"];
@@ -58,7 +61,14 @@ const AccountInvestor = () => {
     e.preventDefault();
     const isFormValid = Object.values(formData).every((value) => value !== "");
     if (isFormValid) {
-      console.log("Form submitted with data:", formData);
+      const data = {
+        interestedTags: JSON.parse(formData.interestedTags),
+        companyName: formData.companyName,
+        jobTitle: formData.jobTitle,
+   
+      };
+      // console.log("Form submitted with data:", data);
+      company(data);
     } else {
       toast("ℹ️ Please fill in all required fields before submitting.");
     }
@@ -225,6 +235,7 @@ const AccountInvestor = () => {
                       </Button>
                       <Button
                         // onClick={handleNext}
+                        isLoading={isPending}
                         type={"button"}
                         variant="primary"
                         onClick={handleFinalSubmit}

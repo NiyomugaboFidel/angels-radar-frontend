@@ -84,13 +84,13 @@ export const Forms: React.FC<{
               ? ` (${initialCategories.length} selected)`
               : ""}
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 w-full gap-3">
+          <div className="flex flex-wrap  w-full gap-3">
             {categories.map((category, index) => (
               <button
                 key={index}
                 type="button"
                 onClick={() => handleCategoryClick(category)}
-                className={`py-2 px-1 rounded-full text-sm leading-sm text-center font-[400] transition-all duration-300 transform
+                className={`py-2 px-3 rounded-full text-sm leading-sm text-center font-[400] transition-all duration-300 transform
                   ${
                     initialCategories.includes(category)
                       ? "bg-primaryColor text-white"
@@ -339,13 +339,13 @@ export const Forms2: React.FC<{
             ? ` (${initialCategories.length} selected)`
             : ""}
         </p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 w-full gap-3">
+        <div className="flex flex-wrap  w-full gap-3">
           {categories.map((category, index) => (
             <button
               key={index}
               type="button"
               onClick={() => handleCategoryClick(category)}
-              className={`py-2 px-1 rounded-full text-sm leading-sm text-center font-[400] transition-all duration-300 transform
+              className={`py-2 px-3 rounded-full text-sm leading-sm text-center font-[400] transition-all duration-300 transform
                 ${
                   initialCategories.includes(category)
                     ? "bg-primaryColor text-white"
@@ -380,17 +380,17 @@ export const Forms2: React.FC<{
           <div>
             <div className="flex flex-col gap-1">
               <label
-                htmlFor="jobTitleInCompany"
+                htmlFor="jobTitle"
                 className=" px-1 text-sm font-medium text-color1"
               >
                 Job title in company
               </label>
               <Select
-                value={formData.jobTitleInCompany || ""}
+                value={formData.jobTitle || ""}
                 onValueChange={(value) => {
                   onChange({
                     target: {
-                      name: "jobTitleInCompany",
+                      name: "jobTitle",
                       value: value,
                       type: "select-one",
                     },
@@ -398,7 +398,7 @@ export const Forms2: React.FC<{
                 }}
               >
                 <SelectTrigger
-                  id="jobTitleInCompany"
+                  id="jobTitle"
                   className="w-full outline-none focus:right-0"
                 >
                   <SelectValue placeholder="Select" className="text-color2" />

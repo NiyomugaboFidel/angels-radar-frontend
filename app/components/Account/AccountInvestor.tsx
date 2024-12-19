@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 import { Forms } from "./Tools";
 import toast from "react-hot-toast";
 import useCreateInvestor from "@/app/hooks/profile/useCreateInvestor";
-import { createInvestorType } from "@/app/libs/investor";
 
 const AccountInvestor = () => {
   const [currentPage, setCurrentPage] = useState(0);
