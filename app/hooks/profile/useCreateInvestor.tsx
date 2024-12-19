@@ -8,11 +8,9 @@ const useCreateInvestor = () => {
   return useMutation({
     mutationFn: (data: createInvestorType) => createInvestor(data),
     onSuccess: (data) => {
-        // console.log("investor:", data);
       toast.success("Profile create successful!");
-      setTimeout(() => {
-        router.push(`/`);
-      }, 1500);
+      router.push('/');
+     
     },
     onError: (error: any) => {
       const errorMessage = error.response?.data.errors
