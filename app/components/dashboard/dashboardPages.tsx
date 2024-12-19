@@ -6,6 +6,7 @@ import Profile from "./Profile"
 import Radar from "./Radar"
 import Watchlist from "./Watchlist"
 import CompanyProfile from "../layout/companyProfile"
+import CoverPage from "./CoverPage"
 export const companyData = {
     companyName:"Micro Ai ",
     investmentsType: "Equity",
@@ -77,7 +78,7 @@ const DashboardPages = () => {
        return  <CompanyProfile />
        break
     default:
-       return <div>Select page</div>    
+       return <CoverPage />   
 
     }
 }

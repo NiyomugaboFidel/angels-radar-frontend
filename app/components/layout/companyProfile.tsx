@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import ProfileHeader from "../common/ProfileHeader";
 import { useCompanyProfileById } from "@/app/hooks/company/useCompanyProfile";
+import CompanyProfileSkeleton from "../skeleton/CompanyProfileSkeleton";
+import Link from "next/link";
 
 interface Document {
   name: string;
@@ -162,11 +164,12 @@ const CompanyProfile = () => {
 
   if (!companyId) return null;
 
-  const { data, isFetched } = useCompanyProfileById(companyId);
+  const { data, isFetched , isFetching, isPending, isError} = useCompanyProfileById(companyId);
   
-  if (!isFetched || !data) {
-    return <div>Loading...</div>;
+  if (!isFetched || !data || isFetching || isPending || isError) {
+    return <CompanyProfileSkeleton />;
   }
+
 
   const companyData = transformCompanyData(data?.data);
   const {
@@ -203,9 +206,11 @@ const CompanyProfile = () => {
   return (
     <div className="flex flex-col gap-2 h-[75vh]">
       <div className="flex items-center gap-2 text-color2">
-        <p className="text-sm leading-sm text-primaryColor font-semibold">
+          <Link href={`/?section=${section}`} className="hover:underline">
+          <p className="text-sm leading-sm text-primaryColor font-semibold">
           {section}
         </p>{" "}
+        </Link>
         / <p className="text-sm leading-sm text-color2">{companyProfile}</p>
       </div>
       <div className="w-full flex flex-col gap-4 overflow-auto">

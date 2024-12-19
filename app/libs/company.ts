@@ -21,3 +21,49 @@ export const getCompanyProfileById = async (id:string) => {
     return response.data; 
   };
   
+
+  export interface Filters {
+    [key: string]: string | number | undefined;
+  }
+  
+ 
+interface CompanyProfile {
+  _id: string;
+  logo: string;
+  tagline: string;
+  description: string;
+  background: string;
+  fundRaiseDetails: {
+    stage: string;
+  };
+  companyId: {
+    companyName: string;
+    interestedTags: string[];
+  };
+  investmentsType: string[];
+  metrics: {
+    valuation: number;
+    evaluationScore: number;
+    growthRate: number;
+    mrr: number;
+    angelOffering: boolean;
+    fundingRequired: number;
+  };
+}
+
+export interface GetCompanyProfileResponse {
+  data: CompanyProfile[];
+}
+
+export const getCompanyProfileFilter = async (filters: Filters, search: string): Promise<GetCompanyProfileResponse> => {
+  // Make sure filters has the correct types
+  const params: { [key: string]: string | number } = {
+    ...filters,
+    search,
+  };
+
+  console.log(params);  // Check the structure of params before sending the request
+  
+  const response = await api.get('/search', { params });
+  return response.data;
+};

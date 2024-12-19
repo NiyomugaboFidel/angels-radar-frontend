@@ -14,10 +14,10 @@ interface FundRaiseDetails {
 }
 
 interface Metrics {
-  mrr: string;
-  growthRate: string;
+  mrr: string | number;
+  growthRate: string| number;
   valuation: number;
-  fundingRequired: number;
+  fundingRequired: string | number;
 }
 
 interface CompanyId {

@@ -20,7 +20,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   return (
     <div className="relative w-full border rounded-lg overflow-hidden shadow-lg">
       {/* Header Background */}
-      <div className="relative w-full h-48">
+      <div className="relative w-full h-48 sm:h-56">
         <Image
           src={background}
           alt="Header Image"
@@ -31,58 +31,60 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
       </div>
 
       {/* Content */}
-      <div className="relative bg-white px-4 pb-6 pt-4">
+      <div className="relative bg-white px-4 pb-6 pt-2 ">
         {/* Logo and Name */}
-        <div className="flex items-center gap-4">
+        <div className=" flex w-full md:flex-row flex-col  items-center  md:gap-[150px]">
           {/* Profile Logo */}
-          <div className="w-1/4">
-            <div className="absolute -top-8 left-4 w-[100px] h-[100px] bg-white border rounded-full overflow-hidden shadow-md">
-              <Image
-                src={logo}
-                alt="Profile Logo"
-                layout="responsive"
-                width={64}
-                height={64}
-              />
-            </div>
+         <div className="w-full md:w-[0%]">
+         <div className="absolute -top-8  md:w-[120px] h-[80px] w-[80px] md:h-[120px] bg-white border rounded-full overflow-hidden shadow-md">
+            <Image
+              src={logo}
+              alt="Profile Logo"
+              layout="responsive"
+              width={100}
+              height={100}
+            />
           </div>
+         </div>
 
           {/* Profile Information */}
-          <div className="w-full">
-            <div className="flex items-center gap-4">
-              <p className=" text-[18px]  leading-[28px] font-[600] text-color1">
+         <div className="flex flex-col md:flex-row w-full md:justify-between items-end gap-2">
+         <div className="flex-1 text-center sm:text-left">
+            <div className="flex items-center justify-center sm:justify-start gap-2">
+              <p className="md:text-lg  font-semibold text-color1">
                 {companyName}
               </p>
               <MdVerified className="text-secondaryColor" />
             </div>
-            <p className="text-[16px] leading-[20px] text-color1">{tagline}</p>
-            <div className="flex flex-wrap gap-2 mt-4">
+            <p className="text-sm sm:text-base text-color1 ">{tagline}</p>
+            <div className="flex flex-wrap gap-2 justify-center sm:justify-start mt-4">
               {interestedTags.map((tag, index) => (
                 <span
                   key={index}
-                  className="bg-blue-100 text-primaryColor text-[14px] font-[500] px-3 py-2 rounded-full"
+                  className="bg-blue-100 text-primaryColor text-xs sm:text-sm font-medium px-3 py-1 rounded-full"
                 >
                   {tag}
                 </span>
               ))}
             </div>
           </div>
-                {/* Buttons */}
-          <div className="flex gap-4 mt-6 h-full items-end w-full">
-      <Button className="w-full">
-      Schedule a call
-      </Button>
-     <Button variant="secondary">
-        Seek deck
-     </Button>
-        </div>
+
+    {/* Buttons */}
+    <div className="flex  gap-4 ">
+          <Button className="w-full sm:w-auto">Schedule a call</Button>
+          <Button variant="secondary" className="w-full sm:w-auto">
+            Seek deck
+          </Button>
         </div>
 
-  
-       
+         </div>
+        </div>
+
+    
       </div>
     </div>
   );
 };
+
 
 export default ProfileHeader;

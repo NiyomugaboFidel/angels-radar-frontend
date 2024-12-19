@@ -1,19 +1,19 @@
 import useLogout from "@/app/hooks/users/useLogout";
-import { X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
-
+import { FaAngleLeft } from "react-icons/fa6";
 interface SidebarProps {
   isActive?: string;
+  isOpen?: boolean;
   setIsActive?: (value: string) => void;
   setIsOpen: (value: boolean) => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
-  setIsActive,
   setIsOpen,
+  isOpen
 }) => {
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -104,7 +104,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   };
 
   return (
-    <div className="bg-[#ffffff] text-color1 z-[100]  shadow-lg w-full  flex flex-col  justify-center">
+    <div className={`bg-[#ffffff] text-color1 z-[100]  shadow-lg w-full  flex flex-col  justify-center`}>
       <div className="flex w-full justify-between items-center p-3 gap-5 ">
         {/* Logo Section */}
         <Link className=" p-2 w-full " href="/">
@@ -119,10 +119,10 @@ const Sidebar: React.FC<SidebarProps> = ({
           </div>
         </Link>
         <button
-          className=" lg:hidden p-2 bg-[#c3dcf3af] rounded-full "
+          className=" flex lg:hidden"
           onClick={() => setIsOpen(false)}
         >
-          <X className="text-primaryColor" />
+          <FaAngleLeft  className=" flex lg:hidden"/>
         </button>
       </div>
       {/* Sidebar Buttons */}
